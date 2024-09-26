@@ -1,0 +1,27 @@
+[
+  {
+    "education": {
+      "institution": "Shivajirao Kadam Institute Of Technology And Management, Indore",
+      "start_date": "JUNE 2020",
+      "end_date": "JUNE 2024",
+      "degree": "B.Tech Computer Science",
+      "cgpa": 8.07
+    }
+  },
+  {
+    "education": {
+      "institution": "Aradhana Higher Secondary School, Neemuch",
+      "start_date": "APR 2019",
+      "end_date": "APR 2020",
+      "grade": "Grade - XII"
+    }
+  },
+  {
+    "education": {
+      "institution": "Alpha Higher Secondary School, Neemuch",
+      "start_date": "APR 2016",
+      "end_date": "APR 2017",
+      "grade": "Grade - X"
+    }
+  }
+]

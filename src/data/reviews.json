@@ -1,0 +1,30 @@
+{
+  "recommendations": [
+    {
+      "feedback": "Abhishek Tiwari demonstrated exceptional analytical and problem-solving skills in his coursework, especially in programming and algorithm design.",
+      "professor": "Dr. Anjali Sharma",
+      "title": "Associate Professor of Computer Science"
+    },
+    {
+      "feedback": "Abhishek's creativity and technical proficiency in project development were truly impressive, particularly in web and software development.",
+      "professor": "Mr. Rajesh Iyer",
+      "title": "Lecturer in Web Development"
+    },
+    {
+      "feedback": "He consistently delivers high-quality code and demonstrates an in-depth understanding of system design and architecture.",
+      "professor": "Dr. Priya Menon",
+      "title": "Professor of Software Engineering"
+    },
+    {
+      "feedback": "Abhishek is a natural leader who excels in collaborative environments and drives innovation through teamwork.",
+      "professor": "Dr. Amit Gupta",
+      "title": "Assistant Professor of Project Management"
+    },
+    {
+      "feedback": "His participation in class discussions, particularly around emerging technologies and software trends, greatly enriches the learning environment.",
+      "professor": "Ms. Pooja Desai",
+      "title": "Senior Lecturer in Computer Science"
+    }
+  ]
+}
+
