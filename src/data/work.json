@@ -1,9 +1,0 @@
-{
-  "work_experience": [
-    {
-      "company": "Salesqueen Software Solutions",
-      "description": "Resolved a critical bug in an HR management dashboard, correcting issues with inaccurate graph rendering using ReactJS. Developed and implemented sub-tabs for employee login/logout records and upcoming leave dates with HTML and Bootstrap. Enhanced dashboard functionality by integrating additional features for improved HR management, leveraging ReactJS and Bootstrap for a responsive design.",
-      "profile_link": "Visit my Profile"
-    }
-  ]
-}
