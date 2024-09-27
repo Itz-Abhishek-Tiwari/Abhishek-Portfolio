@@ -80,7 +80,8 @@ nav {
   background-color: var(--sumiInk2);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  position: relative;
+  position: sticky;
+  top: 0;
 }
 
 .nav-brand {
