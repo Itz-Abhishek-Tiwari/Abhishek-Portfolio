@@ -8,8 +8,11 @@ export default function Projects({ projects }) {
           {
             projects.map((item) => {
               return (
-                <div key={item.id}>
-                  <li>{item.project_title}</li>
+                <div key={item.id} className="project-list-li">
+                  <li>
+                    {item.project_title}
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="profile-link">Git <i className="ri-github-fill"></i></a>
+                  </li>
                 </div>
               )
             })

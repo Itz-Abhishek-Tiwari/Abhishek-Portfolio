@@ -1,45 +1,43 @@
-/* Kanagawa Color Palette */
 :root {
-  --fujiWhite: #DCD7BA;
-  --oldWhite: #C8C093;
-  --sumiInk0: #16161D;
-  --sumiInk1: #1F1F28;
-  --sumiInk2: #2A2A37;
+  --fujiWhite: #dcd7ba;
+  --oldWhite: #c8c093;
+  --sumiInk0: #16161d;
+  --sumiInk1: #1f1f28;
+  --sumiInk2: #2a2a37;
   --sumiInk3: #363646;
-  --sumiInk4: #54546D;
+  --sumiInk4: #54546d;
   --waveBlue1: #223249;
-  --waveBlue2: #2D4F67;
-  --winterGreen: #2B3328;
-  --winterYellow: #49443C;
-  --winterRed: #43242B;
+  --waveBlue2: #2d4f67;
+  --winterGreen: #2b3328;
+  --winterYellow: #49443c;
+  --winterRed: #43242b;
   --winterBlue: #252535;
-  --autumnGreen: #76946A;
-  --autumnRed: #C34043;
-  --autumnYellow: #DCA561;
-  --samuraiRed: #E82424;
-  --roninYellow: #FF9E3B;
-  --waveAqua1: #6A9589;
+  --autumnGreen: #76946a;
+  --autumnRed: #c34043;
+  --autumnYellow: #dca561;
+  --samuraiRed: #e82424;
+  --roninYellow: #ff9e3b;
+  --waveAqua1: #6a9589;
   --dragonBlue: #658594;
   --fujiGray: #727169;
-  --springViolet1: #938AA9;
-  --oniViolet: #957FB8;
-  --crystalBlue: #7E9CD8;
-  --springViolet2: #9CABCA;
-  --springBlue: #7FB4CA;
-  --lightBlue: #A3D4D5;
-  --waveAqua2: #7AA89F;
-  --springGreen: #98BB6C;
+  --springViolet1: #938aa9;
+  --oniViolet: #957fb8;
+  --crystalBlue: #7e9cd8;
+  --springViolet2: #9cabca;
+  --springBlue: #7fb4ca;
+  --lightBlue: #a3d4d5;
+  --waveAqua2: #7aa89f;
+  --springGreen: #98bb6c;
   --boatYellow1: #938056;
-  --boatYellow2: #C0A36E;
-  --carpYellow: #E6C384;
-  --sakuraPink: #D27E99;
-  --waveRed: #E46876;
-  --peachRed: #FF5D62;
-  --surimiOrange: #FFA066;
-  --katanaGray: #717C7C;
+  --boatYellow2: #c0a36e;
+  --carpYellow: #e6c384;
+  --sakuraPink: #d27e99;
+  --waveRed: #e46876;
+  --peachRed: #ff5d62;
+  --surimiOrange: #ffa066;
+  --katanaGray: #717c7c;
 }
 
-/* Basic Reset */
 body,
 h1,
 h2,
@@ -50,36 +48,30 @@ ul {
   padding: 0;
 }
 
-/* Body Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: var(--sumiInk0);
   color: var(--fujiWhite);
   line-height: 1.6;
   padding: 0 15px;
-  /* Add padding for better spacing */
 }
 
-/* Max-width for better readability */
 header,
 main,
 footer {
   max-width: 1200px;
   margin: auto;
-  /* Center elements */
   border: 1px solid var(--roninYellow);
 }
 
-/* Header Styles */
 header {
   background-color: var(--waveBlue1);
   padding: 40px 20px;
-  /* Increased padding for a more spacious look */
+
   text-align: center;
   border-bottom: 5px solid var(--roninYellow);
 }
 
-/* Navigation Bar */
 nav {
   display: flex;
   justify-content: space-between;
@@ -108,7 +100,6 @@ nav {
   font-weight: bold;
 }
 
-/* Navigation Links */
 .nav-links {
   list-style: none;
   display: flex;
@@ -120,7 +111,9 @@ nav {
   text-decoration: none;
   color: var(--fujiWhite);
   font-weight: bold;
-  transition: color 0.3s, transform 0.3s;
+  transition:
+    color 0.3s,
+    transform 0.3s;
 }
 
 .nav-links a:hover {
@@ -128,142 +121,123 @@ nav {
   transform: translateY(-2px);
 }
 
-/* Mobile styles */
 .nav-toggle {
   display: none;
-  /* Hide toggle button by default */
+
   cursor: pointer;
   font-size: 2rem;
   color: var(--fujiWhite);
-  /* Toggle icon color */
 }
 
 @media (max-width: 768px) {
   .nav-links {
     display: none;
-    /* Hide links by default */
+
     flex-direction: column;
-    /* Stack links vertically */
+
     position: absolute;
-    /* Positioning */
+
     top: 60px;
-    /* Below the nav bar */
+
     right: 0;
     background-color: var(--sumiInk2);
-    /* Background for dropdown */
+
     width: 100%;
-    /* Full width */
+
     padding: 15px 0;
-    /* Padding for dropdown */
+
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
-    /* Ensure links are on top */
   }
 
   .nav-links li {
     text-align: center;
-    /* Center align text in mobile */
+
     padding: 10px 0;
-    /* Add spacing between items */
   }
 
   .nav-toggle {
     display: block;
-    /* Show toggle button on mobile */
   }
 
   .nav-links.active {
     display: flex;
-    /* Show links when active */
   }
 }
 
-/* Hero Section */
 .hero-section {
   text-align: center;
   padding: 50px 20px;
-  /* Adjust padding for better spacing */
+
   background-color: var(--waveBlue1);
   border-radius: 8px;
   margin: 20px 0;
-  /* Space between sections */
 }
 
-/* Main Styles */
 main {
   padding: 20px;
 }
 
-
-/* Work Experience Section */
 .section-about {
   background-color: var(--sumiInk1);
-  /* Background for the section */
+
   padding: 40px 20px;
-  /* Added padding for spacing */
+
   border-radius: 8px;
-  /* Rounded corners */
+
   margin-bottom: 40px;
-  /* Space below the section */
+
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  /* Shadow for depth */
 }
 
 .work-experience-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* Space between work items */
 }
 
 .project {
   background-color: var(--sumiInk2);
-  /* Background for each work item */
+  text-align: justify;
   padding: 20px;
-  /* Increased padding for better spacing */
+
   border-radius: 8px;
-  /* Rounded corners for items */
+
   transition: transform 0.2s;
-  /* Smooth transition for hover effect */
+
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Shadow for items */
 }
 
 .project:hover {
   transform: translateY(-5px);
-  /* Lift effect on hover */
 }
 
 .project h3 {
   color: var(--roninYellow);
-  /* Highlight company name */
+
   margin-bottom: 10px;
-  /* Space below the heading */
+
   font-size: 1.5rem;
-  /* Increased font size for emphasis */
 }
 
 .project p {
   margin-bottom: 15px;
-  /* Space below the description */
+
   color: var(--fujiWhite);
-  /* Color for description text */
 }
 
 .project a {
   text-decoration: none;
-  /* Remove underline from link */
-  color: var(--waveBlue2);
-  /* Link color */
+
+  color: var(--roninYellow);
+
   font-weight: bold;
-  /* Bold for emphasis */
+
   transition: color 0.3s;
-  /* Smooth color transition */
 }
 
 .project a:hover {
   color: var(--roninYellow);
-  /* Change color on hover */
 }
 
 h2 {
@@ -271,12 +245,10 @@ h2 {
   margin-bottom: 10px;
   font-size: 2rem;
   border-bottom: 2px solid var(--roninYellow);
-  /* Underline for section headings */
+
   padding-bottom: 5px;
-  /* Padding for spacing */
 }
 
-/* Project List */
 .project-list {
   list-style: none;
   padding: 0;
@@ -288,21 +260,38 @@ h2 {
   margin: 10px 0;
   border-radius: 5px;
   transition: transform 0.2s;
-  /* Smooth transition */
+  display: flex;
+  justify-content: space-between;
 }
+
+.profile-link {
+  display: inline-block;
+  color: var(--crystalBlue);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-link:hover {
+  transform: scale(1.05);
+  color: var(--roninYellow);
+}
+
 
 .project-list li:hover {
   transform: scale(1.03);
-  /* Slightly increased scale on hover */
 }
 
-/* Education Section */
+
+
 .education {
-  background-color: var(--sumiInk2);
+  background-color: var(--sumiInk1);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  /* Added shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .education-details {
@@ -310,41 +299,38 @@ h2 {
   flex-direction: column;
   gap: 15px;
   margin-bottom: 13px;
-  /* Space between items */
 }
 
 .education-summary,
 .education-courses {
-  background-color: var(--sumiInk3);
-  /* Slightly different background for summary */
+  background-color: var(--sumiInk2);
   padding: 15px;
   border-radius: 5px;
-  /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.education-summary:hover,
+.education-courses:hover {
+  transform: translateY(-3px);
 }
 
 .education-courses h3 {
   margin-bottom: 10px;
-  /* Space below the heading */
   color: var(--roninYellow);
-  /* Highlight the course heading */
 }
 
 .education-courses ul {
   list-style-type: disc;
-  /* Bullet points for the list */
   margin-left: 20px;
-  /* Indentation for list items */
 }
 
-/* Footer Styles */
 footer {
   background-color: var(--waveBlue2);
   padding: 40px 20px;
-  /* Increased padding for a more spacious footer */
+
   text-align: center;
   color: var(--fujiWhite);
   border-top: 1px solid var(--sumiInk4);
-  /* Subtle top border */
 }
 
 .reviews {
@@ -352,7 +338,6 @@ footer {
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
-  /* Added bottom margin for spacing */
 }
 
 .review {
@@ -362,41 +347,34 @@ footer {
   border-radius: 5px;
   width: 90%;
   max-width: 600px;
-  /* Responsive max width */
+
   transition: transform 0.2s;
-  /* Added transition for hover effect */
 }
 
 .review:hover {
   transform: scale(1.02);
-  /* Slightly increased scale on hover */
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   nav {
-    flex-direction: column;
-    /* Stack nav items on small screens */
-    align-items: flex-start;
-    /* Align items to the left */
+    flex-direction: row;
+
+    align-items: space-between;
   }
 
   .nav-links {
     flex-direction: column;
-    /* Stack links vertically */
+
     gap: 10px;
-    /* Space between links */
+
     margin-top: 10px;
-    /* Space between logo and links */
   }
 
   .hero-section {
     padding: 30px 10px;
-    /* Reduce padding on smaller screens */
   }
 
   h2 {
     font-size: 1.5rem;
-    /* Smaller headings on mobile */
   }
 }
