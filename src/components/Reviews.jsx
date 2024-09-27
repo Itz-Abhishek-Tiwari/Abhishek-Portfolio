@@ -1,4 +1,5 @@
-export default function Reviews({ reviews }) {
+export default function Reviews({ review }) {
+
 
   return (
     <>
@@ -8,9 +9,9 @@ export default function Reviews({ reviews }) {
 
       <div className="reviews">
         {
-          reviews.recommendations.map((item, index) => {
+          review.map((item) => {
             return (
-              <div className="review" key={index}>
+              <div className="review" key={item.id}>
                 <p>{item.feedback}</p>
                 <p><strong>{item.professor}</strong><br />{item.title}</p>
               </div>

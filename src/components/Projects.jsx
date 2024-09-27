@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 export default function Projects({ projects }) {
 
   return (
@@ -7,19 +6,16 @@ export default function Projects({ projects }) {
         <h2>Projects</h2>
         <ul className="project-list">
           {
-            projects.projects_title.map((item, index) => {
-              return <li key={index}>{item}</li>
+            projects.map((item) => {
+              return (
+                <div key={item.id}>
+                  <li>{item.project_title}</li>
+                </div>
+              )
             })
           }
         </ul>
       </section>
-
     </>
   )
 }
-// PropTypes validation
-Projects.propTypes = {
-  projects: PropTypes.shape({
-    projects_title: PropTypes.arrayOf(PropTypes.string).isRequired, // Adjust type based on your data structure
-  }).isRequired,
-};
