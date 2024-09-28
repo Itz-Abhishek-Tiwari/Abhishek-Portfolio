@@ -11,7 +11,7 @@ export default function Projects({ projects }) {
                 <div key={item.id} className="project-list-li">
                   <li>
                     {item.project_title}
-                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="profile-link">Git <i className="ri-github-fill"></i></a>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="profile-link">GitHub <i className="ri-github-fill"></i></a>
                   </li>
                 </div>
               )

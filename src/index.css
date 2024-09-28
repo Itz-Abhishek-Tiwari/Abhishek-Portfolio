@@ -59,15 +59,12 @@ body {
 header,
 main,
 footer {
-  max-width: 1200px;
   margin: auto;
-  border: 1px solid var(--roninYellow);
 }
 
 header {
   background-color: var(--waveBlue1);
   padding: 40px 20px;
-
   text-align: center;
   border-bottom: 5px solid var(--roninYellow);
 }
@@ -76,7 +73,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 10px 20px;
   background-color: var(--sumiInk2);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -124,7 +121,6 @@ nav {
 
 .nav-toggle {
   display: none;
-
   cursor: pointer;
   font-size: 2rem;
   color: var(--fujiWhite);
@@ -133,27 +129,19 @@ nav {
 @media (max-width: 768px) {
   .nav-links {
     display: none;
-
     flex-direction: column;
-
     position: absolute;
-
     top: 60px;
-
     right: 0;
     background-color: var(--sumiInk2);
-
     width: 100%;
-
     padding: 15px 0;
-
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
   }
 
   .nav-links li {
     text-align: center;
-
     padding: 10px 0;
   }
 
@@ -166,28 +154,127 @@ nav {
   }
 }
 
+/*Skill */
+.skill-section {
+  background-color: var(--sumiInk1);
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 40px;
+  padding-top: 20px;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--fujiWhite);
+  text-align: center;
+  transition: transform 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.skill-item:hover {
+  transform: scale(1.1);
+  color: var(--roninYellow);
+}
+
+.skill-icon {
+  font-size: 3rem;
+  color: var(--crystalBlue);
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+}
+
+.skill-item:hover .skill-icon {
+  color: var(--roninYellow);
+  transform: scale(1.2);
+}
+
+.skill-name {
+  font-weight: bold;
+}
+
+
+/*404 Error*/
+.error-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  margin: 0;
+}
+
+.error-container {
+  text-align: center;
+  max-width: 600px;
+  padding: 40px 20px;
+  background-color: var(--sumiInk1);
+  border: 2px solid var(--roninYellow);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.error-container h1 {
+  font-size: 6rem;
+  color: var(--autumnRed);
+  margin-bottom: 20px;
+}
+
+.error-container h2 {
+  font-size: 2rem;
+  color: var(--roninYellow);
+  margin-bottom: 10px;
+}
+
+.error-container p {
+  font-size: 1.2rem;
+  color: var(--fujiWhite);
+  margin-bottom: 20px;
+}
+
+.error-container a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: var(--waveBlue1);
+  color: var(--fujiWhite);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.error-container a:hover {
+  background-color: var(--roninYellow);
+  color: var(--sumiInk0);
+}
+
+
 .hero-section {
   text-align: center;
   padding: 50px 20px;
-
   background-color: var(--waveBlue1);
   border-radius: 8px;
   margin: 20px 0;
 }
 
 main {
+  max-width: 1200px;
   padding: 20px;
 }
 
 .section-about {
   background-color: var(--sumiInk1);
-
   padding: 40px 20px;
-
   border-radius: 8px;
-
   margin-bottom: 40px;
-
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -201,11 +288,8 @@ main {
   background-color: var(--sumiInk2);
   text-align: justify;
   padding: 20px;
-
   border-radius: 8px;
-
   transition: transform 0.2s;
-
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -215,25 +299,19 @@ main {
 
 .project h3 {
   color: var(--roninYellow);
-
   margin-bottom: 10px;
-
   font-size: 1.5rem;
 }
 
 .project p {
   margin-bottom: 15px;
-
   color: var(--fujiWhite);
 }
 
 .project a {
   text-decoration: none;
-
-  color: var(--roninYellow);
-
+  color: var(--crystalBlue);
   font-weight: bold;
-
   transition: color 0.3s;
 }
 
@@ -246,7 +324,6 @@ h2 {
   margin-bottom: 10px;
   font-size: 2rem;
   border-bottom: 2px solid var(--roninYellow);
-
   padding-bottom: 5px;
 }
 
@@ -326,9 +403,8 @@ h2 {
 }
 
 footer {
-  background-color: var(--waveBlue2);
+  background-color: var(--waveBlue1);
   padding: 40px 20px;
-
   text-align: center;
   color: var(--fujiWhite);
   border-top: 1px solid var(--sumiInk4);
@@ -348,7 +424,6 @@ footer {
   border-radius: 5px;
   width: 90%;
   max-width: 600px;
-
   transition: transform 0.2s;
 }
 
@@ -359,15 +434,13 @@ footer {
 @media (max-width: 768px) {
   nav {
     flex-direction: row;
-
     align-items: space-between;
+    padding: 10px;
   }
 
   .nav-links {
     flex-direction: column;
-
     gap: 10px;
-
     margin-top: 10px;
   }
 
