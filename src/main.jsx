@@ -5,6 +5,7 @@ import Home from './pages/Home.jsx'
 import Project from './pages/Project.jsx'
 import Error from './pages/Error.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
+import ProjectIndividual from './components/Projects/ProjectIndividual.jsx'
 
 const router = createBrowserRouter(
   [
@@ -20,6 +21,10 @@ const router = createBrowserRouter(
     {
       path: '/article',
       element: <ArticlePage />
+    },
+    {
+      path: '/projects/:projectid',
+      element: <ProjectIndividual />
     }
   ]
 )

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Projects({ projects }) {
 
   return (
@@ -10,7 +12,9 @@ export default function Projects({ projects }) {
               return (
                 <div key={item.id} className="project-list-li">
                   <li>
-                    {item.project_title}
+                    <Link to={`/projects/${item.id}`} className="reset-link">
+                      {item.project_title}
+                    </Link>
                     <a href={item.link} target="_blank" rel="noopener noreferrer" className="profile-link">GitHub <i className="ri-github-fill"></i></a>
                   </li>
                 </div>
@@ -18,7 +22,7 @@ export default function Projects({ projects }) {
             })
           }
         </ul>
-      </section>
+      </section >
     </>
   )
 }

@@ -81,6 +81,139 @@ nav {
   top: 0;
 }
 
+.reset-link {
+  all: unset;
+  cursor: pointer;
+}
+
+/*Project Page*/
+.project-section {
+  padding: 40px 20px;
+  border-radius: 8px;
+  margin: 40px 0;
+  box-shadow: none;
+  border-radius: 8px;
+  background-color: var(--sumiInk1);
+}
+
+.project-section h2 {
+  color: var(--roninYellow);
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+
+}
+
+.project-description {
+  margin-bottom: 30px;
+  color: var(--fujiWhite);
+  line-height: 1.6;
+}
+
+.project-image {
+  display: block;
+  margin: 20px auto;
+  max-width: 80%;
+  height: 80%;
+  border-radius: 8px;
+}
+
+.technologies-used {
+  margin-bottom: 30px;
+}
+
+.technologies-used h3 {
+  color: var(--roninYellow);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.skill-icon {
+  font-size: 2rem;
+  margin-right: 10px;
+  color: var(--roninYellow);
+}
+
+.skill-name {
+  color: var(--fujiWhite);
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.profile-link {
+  background-color: transparent;
+  color: var(--roninYellow);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-link:hover {
+  color: var(--sumiInk0);
+  transform: translateY(-2px);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: var(--sumiInk1);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+
+.card-image {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid var(--roninYellow);
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.card:hover .card-image {
+  transform: scale(1.01);
+}
+
+.card-title {
+  color: var(--roninYellow);
+  font-size: 1.5rem;
+  margin: 15px 20px;
+}
+
+.card-description {
+  color: var(--fujiWhite);
+  margin: 0 20px 15px;
+  line-height: 1.4;
+}
+
 .nav-brand {
   display: flex;
   align-items: center;
@@ -166,7 +299,7 @@ nav {
 .skill-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 40px;
+  gap: 50px;
   padding-top: 20px;
 }
 
@@ -340,6 +473,7 @@ h2 {
   transition: transform 0.2s;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .profile-link {
