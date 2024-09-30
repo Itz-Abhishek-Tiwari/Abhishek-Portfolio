@@ -14,30 +14,30 @@ export default function Project() {
   }, [url])
 
 
+
   return (
     <>
       <header>
         <Navbar />
         <div className="hero-section">
-          <h1>Project Page</h1>
+          <h1>Projects</h1>
         </div>
       </header>
 
       <main>
         <div className="card-grid">
-          {
-            project.map((item) => {
-              return (
-                <Link key={item.id} className="reset-link" to={`/projects/${item.id}`}>
-                  <div className="card">
-                    <img className='card-image' src={`${url}${item.image}`} alt="Project" />
-                    <h3 className="card-title">{`${item.project_title}`.substring(0, 15) + "..."}</h3>
-                    <p className="card-description">{`${item.project_description}`.substring(0, 90) + "..."}</p>
-                  </div>
-                </Link>
-              )
-            })
-          }
+          {project.map((item) => {
+            const projectImage = item.image.length > 0 ? `${url}${item.image[0].image}` : 'placeholder.jpg';
+            return (
+              <Link key={item.id} className="reset-link" to={`/projects/${item.id}`}>
+                <div className="card">
+                  <img className="card-image" src={projectImage} alt={item.project_title} />
+                  <h3 className="card-title">{`${item.project_title}`.substring(0, 15) + "..."}</h3>
+                  <p className="card-description">{`${item.project_description}`.substring(0, 90) + "..."}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </main>
     </>

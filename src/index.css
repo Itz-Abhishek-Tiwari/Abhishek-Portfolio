@@ -117,6 +117,20 @@ nav {
   border-radius: 8px;
 }
 
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: auto;
+}
+
+.project-image {
+  max-width: 100%;
+  height: auto;
+}
+
 .technologies-used {
   margin-bottom: 30px;
 }
@@ -168,6 +182,10 @@ nav {
 .profile-link:hover {
   color: var(--sumiInk0);
   transform: translateY(-2px);
+}
+
+.education-summary h3 {
+  color: var(--roninYellow);
 }
 
 .card-grid {

@@ -15,7 +15,7 @@ export default function Projects({ projects }) {
                     <Link to={`/projects/${item.id}`} className="reset-link">
                       {item.project_title}
                     </Link>
-                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="profile-link">GitHub <i className="ri-github-fill"></i></a>
+                    <a href={item.git_link} target="_blank" rel="noopener noreferrer" className="profile-link">GitHub <i className="ri-github-fill"></i></a>
                   </li>
                 </div>
               )

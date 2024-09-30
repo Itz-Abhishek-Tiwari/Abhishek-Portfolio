@@ -20,9 +20,22 @@ To get a local copy of the project, follow these steps:
 
 ### (Personal Portfolio)[https://roadmap.sh/projects/portfolio-website]
 
+
+# Todo
+
+- [ ] Need to fix the sider system (make it responsive)
+- [ ] Need to view how I implemented the image in the backend and front end side
+- [ ] Need to make the contact page & article page
+- [ ] Learn about better way to handle api in the front end side
+- [ ] Learn Fix views in backend and make it more userfriendly 
+
+
 ## Acknowledgments
 
 Special thanks to the online community for their feedback and support throughout this project. Their insights were invaluable in enhancing the quality and usability of this portfolio.
+
+
+
 
 ---
 

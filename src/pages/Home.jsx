@@ -38,7 +38,6 @@ export default function Home() {
         <Hero />
       </header>
 
-
       <main>
         <Skills />
         <Projects projects={projects} />
