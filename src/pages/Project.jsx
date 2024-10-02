@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import ReactMarkdown from 'react-markdown';
+import '../components/Projects/style.css'
 
 export default function Project() {
 
@@ -30,10 +32,11 @@ export default function Project() {
             const projectImage = item.image.length > 0 ? `${url}${item.image[0].image}` : 'placeholder.jpg';
             return (
               <Link key={item.id} className="reset-link" to={`/projects/${item.id}`}>
-                <div className="card">
+                <div className="card article-card">
+
                   <img className="card-image" src={projectImage} alt={item.project_title} />
-                  <h3 className="card-title">{`${item.project_title}`.substring(0, 15) + "..."}</h3>
-                  <p className="card-description">{`${item.project_description}`.substring(0, 90) + "..."}</p>
+                  <h3>{item.project_title}</h3>
+                  <ReactMarkdown className="card-description">{`${item.project_description}`.substring(0, 90) + "..."}</ReactMarkdown>
                 </div>
               </Link>
             );

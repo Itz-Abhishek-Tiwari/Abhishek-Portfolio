@@ -1,0 +1,75 @@
+.center-page {
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-page a {
+  margin-left: 3rem;
+}
+
+.project-summary {
+  background-color: var(--sumiInk1);
+  padding: 15px;
+  border-radius: 5px;
+  transform: none;
+  text-align: justify;
+}
+
+.education-summary h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: var(--roninYellow);
+}
+
+.education-summary h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: var(--roninYellow);
+}
+
+.education-summary h3 {
+  font-size: 1em;
+  color: var(--roninYellow);
+}
+
+.education-summary p {
+  line-height: 1.6;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+.education-summary ul,
+.education-summary ol {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.education-summary li {
+  margin-bottom: 10px;
+  color: var(--fujiWhite);
+}
+
+.education-summary pre {
+  background-color: var(--sumiInk4);
+  color: var(--fujiWhite);
+  padding: 10px;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.education-summary a {
+  color: var(--sakuraPink);
+  text-decoration: none;
+}
+
+.education-summary a:hover {
+  text-decoration: underline;
+}
+
+.education-summary img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 10px 0;
+}

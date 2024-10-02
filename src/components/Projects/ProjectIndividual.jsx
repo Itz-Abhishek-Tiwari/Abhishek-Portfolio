@@ -1,89 +1,115 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import Navbar from '../Navbar';
-import SimpleImageSlider from "react-simple-image-slider";
+import { useParams } from 'react-router-dom';
+import { Fade } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+import ReactMarkdown from 'react-markdown';
+import './style.css'
 
 export default function ProjectIndividual() {
-  const { projectid } = useParams();
-  const [projectData, setProjectData] = useState({});
-  const [skills, setSkills] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-  const url = 'http://127.0.0.1:8000/';
+  let [project, setProject] = useState({})
+  let [skills, setSkills] = useState([])
+  let [images, setImages] = useState([])
+  let parms = useParams()
+  let url = 'http://127.0.0.1:8000/'
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${url}projects/${projectid}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setProjectData(data);
-        setSkills(data.skills);
-      } catch (error) {
-        console.error("Error fetching project data:", error);
-      } finally {
-        setLoading(false); // Set loading to false after data fetch
-      }
-    };
+    async function fetchData() {
 
-    fetchData();
-  }, [url, projectid]);
 
-  const images = projectData.image?.map(img => ({ url: url + img.image }));
+      const fetchProject = await fetch(url + 'projects/' + parms.projectid)
+      const response = await fetchProject.json()
+      setProject(response)
+      setSkills(response.skills)
+      setImages(response.image)
+    }
+    fetchData()
+  }, [parms.projectid, url])
+
+  let imageSlider = images.map((item) => {
+    return url + item.image
+
+  })
+
+
+
 
   return (
     <div>
       <header>
         <Navbar />
         <div className="hero-section">
-          <h1>{projectData.project_title}</h1>
+          <h1>
+            {project.project_title}
+          </h1>
         </div>
       </header>
+
+
+
+
       <main>
-        {loading ? ( // Conditional rendering based on loading state
-          <div>Loading...</div>
-        ) : (
-          <div className="project-section">
-            <div className="project-description">
-              <p>{projectData.project_description}</p>
-            </div>
-            {images && images.length > 0 ? ( // Check if images exist
-              <div className="slider-container">
-                <SimpleImageSlider
-                  width={896}
-                  height={504}
-                  images={images}
-                  showBullets={true}
-                  showNavs={true}
-                />
-              </div>
-            ) : (
-              <div>No images available</div>
+        <section className="section-about">
+          <div className="kanagawa-slide-container">
+            <Fade scale={0}>
+              {
+                imageSlider.map((each, index) => (
+                  <img
+                    key={index}
+                    className="kanagawa-slide-image"
+                    src={each}
+                    alt={`Slide ${index + 1}`}
+                  />
+                ))
+              }
+            </Fade>
+          </div>
+
+
+          <div className="center-page">
+            <a href={project.git_link} target="_blank" rel="noopener noreferrer" className="profile-link">
+              GitHub <i className="ri-github-fill"></i>
+            </a>
+
+            {project.git_link !== project.live_link && (
+              <a href={project.live_link} target="_blank" rel="noopener noreferrer" className="profile-link">
+                Live Demo <i className="ri-links-line"></i>
+              </a>
             )}
-            <div className="technologies-used">
-              <h3>Technologies Used:</h3>
-              <div className="skill-grid">
-                {skills.map((item, index) => (
-                  <div className="skill-item" key={index}>
-                    <i className={`devicon-${item}-plain skill-icon`}></i>
-                    <div className="skill-name">{item}</div>
-                  </div>
-                ))}
+          </div>
+
+
+          <div className="work-experience-container project-description">
+            <div className="education-summary project-summary">
+              <div className='project-detail'>
+                <ReactMarkdown>{project.project_description}</ReactMarkdown>
               </div>
-            </div>
-            <div className="project-links">
-              {projectData.git_link &&
-                <a href={projectData.git_link} target='_blank' rel="noopener noreferrer" className="profile-link">View on GitHub</a>
-              }
-              {projectData.live_link &&
-                <a href={projectData.live_link} target='_blank' rel="noopener noreferrer" className="profile-link">Live Demo</a>
-              }
             </div>
           </div>
-        )}
+
+
+          <h2>Skills</h2>
+          <div className="skill-grid">
+            {
+              skills.map((item, index) => {
+                return (
+                  <div className="skill-item" key={index}>
+                    <i className={`devicon-${item}-plain skill-icon`}></i>
+                    <div className="skill-name">{item.toUpperCase()}</div>
+                  </div>
+                )
+              })
+            }
+          </div>
+
+
+
+
+        </section>
+
       </main>
-    </div>
+    </div >
   );
 }
 

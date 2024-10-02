@@ -7,6 +7,8 @@ import Error from './pages/Error.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
 import ProjectIndividual from './components/Projects/ProjectIndividual.jsx'
 import Contect from './pages/Contect.jsx'
+import AricleIndividual from './components/Article/AricleIndividual.jsx'
+
 
 const router = createBrowserRouter(
   [
@@ -30,6 +32,10 @@ const router = createBrowserRouter(
     {
       path: '/projects/:projectid',
       element: <ProjectIndividual />
+    },
+    {
+      path: '/articles/:articleid',
+      element: <AricleIndividual />
     }
   ]
 )

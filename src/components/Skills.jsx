@@ -14,8 +14,8 @@ export default function Skills() {
             <div className="skill-name">JavaScript</div>
           </div>
           <div className="skill-item">
-            <i className="devicon-postgresql-plain skill-icon"></i>
-            <div className="skill-name">SQL</div>
+            <i className="devicon-sqlite-plain skill-icon"></i>
+            <div className="skill-name">SQLite</div>
           </div>
           <div className="skill-item">
             <i className="devicon-html5-plain skill-icon"></i>
