@@ -6,7 +6,7 @@ import Project from './pages/Project.jsx'
 import Error from './pages/Error.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
 import ProjectIndividual from './components/Projects/ProjectIndividual.jsx'
-import Contect from './pages/Contect.jsx'
+import Contact from './pages/Contact.jsx'
 import AricleIndividual from './components/Article/AricleIndividual.jsx'
 
 
@@ -26,8 +26,8 @@ const router = createBrowserRouter(
       element: <ArticlePage />
     },
     {
-      path: '/contect',
-      element: <Contect />
+      path: '/contact',
+      element: <Contact />
     },
     {
       path: '/projects/:projectid',
