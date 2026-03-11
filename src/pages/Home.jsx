@@ -7,28 +7,13 @@ import Reviews from "../components/Reviews"
 import Workexp from "../components/Workexp"
 import '../index.css'
 import Skills from "../components/Skills"
+import portfolioData from "../data.js"
 
 export default function Home() {
-  let url = 'http://127.0.0.1:8000/'
-  const [projects, setProjects] = useState([])
-  const [review, setReviews] = useState([]);
-  const [work, setWork] = useState([])
-  const [education, setEducation] = useState([])
-
-  // Fetch Data 
-  const fetchData = useCallback((endpoint, setData) => {
-    fetch(url + endpoint)
-      .then((response) => response.json())
-      .then((data) => setData(data))
-
-  }, [url])
-
-  useEffect(() => {
-    fetchData(`projects/`, setProjects)
-    fetchData('review/', setReviews)
-    fetchData('work/', setWork)
-    fetchData('education/', setEducation)
-  }, [url, fetchData])
+  const [projects, setProjects] = useState(portfolioData.projects)
+  const [review, setReviews] = useState(portfolioData.review);
+  const [work, setWork] = useState(portfolioData.work)
+  const [education, setEducation] = useState(portfolioData.education)
 
 
   return (

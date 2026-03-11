@@ -5,31 +5,17 @@ import { Fade } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import ReactMarkdown from 'react-markdown';
 import './style.css'
+import portfolioData from '../../data.js'
 
 export default function ProjectIndividual() {
-  let [project, setProject] = useState({})
-  let [skills, setSkills] = useState([])
-  let [images, setImages] = useState([])
   let parms = useParams()
-  let url = 'http://127.0.0.1:8000/'
 
-
-  useEffect(() => {
-    async function fetchData() {
-
-
-      const fetchProject = await fetch(url + 'projects/' + parms.projectid)
-      const response = await fetchProject.json()
-      setProject(response)
-      setSkills(response.skills)
-      setImages(response.image)
-    }
-    fetchData()
-  }, [parms.projectid, url])
+  const project = portfolioData.projects.find(p => p.id == parms.projectid) || {}
+  const skills = project.skills || []
+  const images = project.image || []
 
   let imageSlider = images.map((item) => {
-    return url + item.image
-
+    return item.image
   })
 
 

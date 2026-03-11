@@ -3,21 +3,10 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import Navbar from "../components/Navbar";
 import '../pages/article.css'
+import portfolioData from "../data.js"
 
 export default function ArticlePage() {
-  let url = 'http://127.0.0.1:8000/'
-  let [article, setArticle] = useState([])
-  let [image, setImage] = useState([])
-
-  useEffect(() => {
-    async function fetchData() {
-      const article = await fetch(url + 'articles/')
-      const response = await article.json()
-      setArticle(response)
-      setImage(response.image)
-    }
-    fetchData()
-  }, [url])
+  let [article, setArticle] = useState(portfolioData.articles)
 
   return (
     <>
@@ -33,7 +22,7 @@ export default function ArticlePage() {
 
         <div className="article-card-grid">
           {article.map((item) => {
-            const articleImage = item.image.length > 0 ? `${url}${item.image[0].image}` : 'placeholder.jpg';
+            const articleImage = item.image.length > 0 ? item.image[0].image : 'placeholder.jpg';
             return (
               <div key={item.id}>
                 <Link to={`/articles/${item.id}`} className="article-reset-link" rel="noopener noreferrer">

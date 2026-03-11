@@ -4,25 +4,14 @@ import { useParams } from "react-router-dom";
 import Navbar from "../Navbar";
 import '../Projects/style.css'
 import { Fade } from 'react-slideshow-image';
+import portfolioData from '../../data.js'
 
 
 export default function AricleIndividual() {
-
-  let url = 'http://127.0.0.1:8000/'
-  let [article, setArticle] = useState([])
-  let [images, setImages] = useState([])
   let param = useParams()
 
-
-  useEffect(() => {
-    async function fetchArticle() {
-      let article = await fetch(url + 'article/' + param.articleid)
-      let response = await article.json()
-      setArticle(response)
-      setImages(response.image)
-    }
-    fetchArticle()
-  }, [url, param])
+  const article = portfolioData.articles.find(a => a.id == param.articleid) || {}
+  const images = article.image || []
 
 
   return (
@@ -46,7 +35,7 @@ export default function AricleIndividual() {
                   <img
                     key={index}
                     className="kanagawa-slide-image"
-                    src={url + each.image}
+                    src={each.image}
                     alt={`Slide ${index + 1}`}
                   />
                 ))

@@ -3,17 +3,11 @@ import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import '../components/Projects/style.css'
+import portfolioData from "../data.js"
 
 export default function Project() {
 
-  const [project, setProject] = useState([])
-  let url = 'http://127.0.0.1:8000/'
-
-  useEffect(() => {
-    fetch(url + 'projects/')
-      .then((response) => response.json())
-      .then((data) => setProject(data))
-  }, [url])
+  const [project, setProject] = useState(portfolioData.projects)
 
 
 
@@ -29,7 +23,7 @@ export default function Project() {
       <main>
         <div className="card-grid">
           {project.map((item) => {
-            const projectImage = item.image.length > 0 ? `${url}${item.image[0].image}` : 'placeholder.jpg';
+            const projectImage = item.image.length > 0 ? item.image[0].image : 'placeholder.jpg';
             return (
               <Link key={item.id} className="reset-link" to={`/projects/${item.id}`}>
                 <div className="card article-card">
