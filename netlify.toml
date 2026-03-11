@@ -1,4 +1,7 @@
 # example netlify.toml
+[build.environment]
+  NODE_VERSION = "20.17.0"
+
 [build]
   command = "npm run build"
   functions = "netlify/functions"
