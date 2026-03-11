@@ -1,5 +1,6 @@
-import { useState } from "react";
-import Navbar from "../components/Navbar";
+import React, { useState } from "react";
+import { Navbar } from "../../components";
+import portfolioData from "../../data";
 
 export default function Contact() {
   const url = 'http://127.0.0.1:8000/';
@@ -36,14 +37,13 @@ export default function Contact() {
 
   return (
     <div>
-      <header>
-        <Navbar />
-        <div className="hero-section">
-          <h1>Contact Page</h1>
-        </div>
-      </header>
-
+      <Navbar />
       <main>
+        <div className="hero-section">
+          <h1>Get in touch.</h1>
+          <p>Have a project in mind or just want to say hi? Feel free to reach out.</p>
+        </div>
+
         <div className="contact-form">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
