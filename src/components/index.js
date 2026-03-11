@@ -1,8 +1,26 @@
-export { default as Navbar } from './Navbar';
-export { default as Hero } from './Hero';
-export { Projects, ProjectIndividual } from './Projects';
-export { default as Skills } from './Skills';
-export { default as WorkExperience } from './WorkExperience';
-export { default as Education } from './Education';
-export { default as Reviews } from './Reviews';
-export { default as ArticleIndividual } from './Article';
+import Navbar from './Navbar';
+import Hero from './Hero';
+import SocialLinks from './SocialLinks';
+import { Projects, ProjectIndividual } from './Projects';
+import Skills from './Skills';
+import WorkExperience from './WorkExperience';
+import Education from './Education';
+import Reviews from './Reviews';
+import ArticleIndividual from './Article';
+import Footer from './Footer';
+import FloatingContact from './FloatingContact';
+
+export {
+    Navbar,
+    Hero,
+    SocialLinks,
+    Projects,
+    ProjectIndividual,
+    Skills,
+    WorkExperience,
+    Education,
+    Reviews,
+    ArticleIndividual,
+    Footer,
+    FloatingContact,
+};
