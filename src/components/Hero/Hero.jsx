@@ -35,6 +35,8 @@ export default function Hero() {
     setTimeout(type, 400);
   }, []);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-24 overflow-hidden bg-transparent">
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center text-center">
@@ -73,8 +75,23 @@ export default function Hero() {
             <span className="absolute -top-1 -right-1 h-4 w-4 border-t-2 border-r-2 border-primary z-10" />
             <span className="absolute -bottom-1 -left-1 h-4 w-4 border-b-2 border-l-2 border-primary z-10" />
             <span className="absolute -bottom-1 -right-1 h-4 w-4 border-b-2 border-r-2 border-primary z-10" />
-            <div className="relative h-36 w-36 md:h-44 md:w-44 border-2 border-border overflow-hidden">
-              <img src={profileImg} alt="Abhishek Tiwari" className="h-full w-full object-cover transition-all duration-500 hover:scale-105" />
+            <div className="relative h-36 w-36 md:h-44 md:w-44 border-2 border-border overflow-hidden bg-secondary">
+              {/* Skeleton State */}
+              {!imageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="h-full w-full bg-gradient-to-r from-secondary via-border/50 to-secondary animate-pulse" />
+                  <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    Initializing...
+                  </div>
+                </div>
+              )}
+              <img
+                src={profileImg}
+                alt="Abhishek Tiwari"
+                onLoad={() => setImageLoaded(true)}
+                className={`h-full w-full object-cover transition-all duration-700 hover:scale-105 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                  }`}
+              />
               {/* Online indicator */}
               <div className="absolute bottom-2 right-2 h-3 w-3 border-2 border-background bg-primary" />
             </div>
