@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Phone, Mail } from "lucide-react";
 
@@ -53,13 +54,13 @@ export default function FloatingContact() {
                                             </div>
                                         </a>
                                         <div className="mt-2 pt-2 border-t border-border px-2 pb-2">
-                                            <a
-                                                href="/contact"
+                                            <Link
+                                                to="/contact"
                                                 className="vercel-button-primary w-full py-3 text-[10px] gap-2 justify-center"
                                             >
                                                 <Send className="h-3.5 w-3.5" />
                                                 Full Contact Page
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </motion.div>

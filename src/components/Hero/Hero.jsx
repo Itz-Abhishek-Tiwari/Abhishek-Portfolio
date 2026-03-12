@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { CheckCircle2, MapPin, Clock, Mail, ArrowRight, Code2, Briefcase, Zap, Download } from "lucide-react";
 import profileImg from "../../assets/profile.png";
 import resumePdf from "../../pdf/abhishek_tiwari.pdf";
+import { Link } from "react-router-dom";
 import Typewriter from "../Typewriter/Typewriter";
 
 export default function Hero() {
@@ -107,14 +108,14 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mt-12"
         >
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="vercel-button-primary px-8 py-3 h-12 gap-2 text-sm group"
           >
             <Mail className="h-4 w-4" />
             Contact Me
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
           <a
             href={resumePdf}
             download="Abhishek_Tiwari_Resume.pdf"
@@ -123,13 +124,13 @@ export default function Hero() {
             <Download className="h-4 w-4 text-primary transition-transform group-hover:-translate-y-1" />
             Download Resume
           </a>
-          <a
-            href="/projects"
+          <Link
+            to="/projects"
             className="vercel-button-secondary px-8 py-3 h-12 gap-2 text-sm"
           >
             <Zap className="h-4 w-4 text-primary" />
             View Projects
-          </a>
+          </Link>
         </motion.div>
 
         {/* Quick Stats — sharp cards */}
