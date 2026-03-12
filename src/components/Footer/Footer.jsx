@@ -1,49 +1,63 @@
-import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail } from "lucide-react";
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
-    const socialLinks = [
-        { icon: Github, href: "https://github.com/Itz-Abhishek-Tiwari", label: "GitHub" },
-        { icon: Twitter, href: "https://x.com/itz-abhishek-tiwari", label: "Twitter" },
-        { icon: Linkedin, href: "https://linkedin.com/in/itz-abhishek-tiwari", label: "LinkedIn" },
-        { icon: Mail, href: "mailto:abhitiwariabhi7@gmail.com", label: "Email" },
-    ];
-
     return (
-        <footer className="border-t border-zinc-100 bg-white py-12 dark:border-zinc-900 dark:bg-zinc-950">
-            <div className="mx-auto max-w-4xl px-4 sm:px-6">
-                <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                    <div className="flex flex-col items-center gap-2 sm:items-start">
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                            © {currentYear} Abhishek Tiwari. All rights reserved.
+        <footer className="border-t border-border bg-background">
+            {/* Top accent line */}
+            <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-40" />
+
+            <div className="mx-auto max-w-6xl px-6 py-12">
+                <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
+                    {/* Brand */}
+                    <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                            <span className="font-mono text-lg font-black text-foreground">
+                                abhishek<span className="text-primary">_</span>tiwari
+                            </span>
+                        </div>
+                        <p className="text-xs font-mono text-muted-foreground">
+                            © {currentYear} · All rights reserved
                         </p>
-                        <p className="flex items-center gap-1.5 text-xs text-zinc-400 dark:text-zinc-500">
-                            Built with <Heart className="h-3 w-3 fill-telephone-red text-telephone-red dark:fill-accent-red dark:text-accent-red" /> in Indore
+                        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground/60">
+                            Built in Indore, India 🇮🇳
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-4">
-                        {socialLinks.map((social) => (
+                    {/* Social Icons — sharp squares */}
+                    <div className="flex items-center gap-2">
+                        {[
+                            { icon: Github, href: "https://github.com/Itz-Abhishek-Tiwari", label: "GitHub", hoverColor: "#d3869b" },
+                            { icon: Twitter, href: "https://x.com/itz-abhishek-tiwari", label: "Twitter", hoverColor: "#83a598" },
+                            { icon: Linkedin, href: "https://linkedin.com/in/itz-abhishek-tiwari", label: "LinkedIn", hoverColor: "#8ec07c" },
+                            { icon: Mail, href: "mailto:abhitiwariabhi7@gmail.com", label: "Email", hoverColor: "#fe8019" },
+                        ].map((social) => (
                             <a
                                 key={social.label}
                                 href={social.href}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="group flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 transition-all hover:border-telephone-red hover:bg-telephone-red/5 dark:border-zinc-800 dark:hover:border-accent-red dark:hover:bg-accent-red/5"
+                                className="group flex h-10 w-10 items-center justify-center border border-border bg-secondary transition-all hover:scale-105"
+                                style={{ '--hover-color': social.hoverColor }}
                                 aria-label={social.label}
+                                onMouseEnter={e => e.currentTarget.style.borderColor = social.hoverColor}
+                                onMouseLeave={e => e.currentTarget.style.borderColor = ''}
                             >
-                                <social.icon className="h-4 w-4 text-zinc-500 transition-colors group-hover:text-telephone-red dark:text-zinc-400 dark:group-hover:text-accent-red" />
+                                <social.icon className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
                             </a>
                         ))}
                     </div>
                 </div>
 
-                <div className="mt-12 text-center">
-                    <p className="font-serif text-sm italic text-zinc-400 dark:text-zinc-600">
-                        "Design is not just what it looks like and feels like. Design is how it works."
+                <div className="mt-8 pt-6 border-t border-border/50 flex items-center justify-between">
+                    <p className="text-xs font-mono italic text-muted-foreground/50">
+                        &quot;First, solve the problem. Then, write the code.&quot;
                     </p>
+                    <div className="flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 bg-primary animate-pulse" />
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">gruvbox</span>
+                    </div>
                 </div>
             </div>
         </footer>

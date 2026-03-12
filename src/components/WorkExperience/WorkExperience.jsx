@@ -1,34 +1,42 @@
-import { Briefcase, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import PropTypes from 'prop-types';
 
 export default function WorkExperience({ work = [] }) {
   return (
-    <section className="px-4 py-20 sm:px-6">
-      <div className="mb-12 flex items-center gap-2">
-        <span className="h-px w-8 bg-telephone-red dark:bg-accent-red"></span>
-        <h2 className="font-serif text-2xl font-medium tracking-tight text-zinc-950 dark:text-zinc-50">Career Journey</h2>
+    <section className="px-6 py-20 max-w-6xl mx-auto">
+      <div className="mb-12 flex items-center gap-3">
+        <span className="h-px w-12 bg-primary" />
+        <h2 className="text-2xl font-mono font-black uppercase tracking-widest text-foreground">Career Journey</h2>
       </div>
-      <div className="flex flex-col">
+
+      <div className="flex flex-col border border-border divide-y divide-border">
         {work.map((item, index) => (
           <div
             key={item.id}
-            className={`group relative flex flex-col gap-3 pl-8 transition-colors ${index !== work.length - 1 ? "border-l-2 border-zinc-100 pb-16 dark:border-zinc-900 hover:border-telephone-red/30 dark:hover:border-accent-red/30" : "pb-0"
-              }`}
+            className="group relative flex flex-col gap-4 p-6 md:p-8 transition-colors hover:bg-secondary/20"
           >
-            <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full border-2 border-white bg-zinc-200 transition-all duration-300 group-hover:scale-125 group-hover:bg-telephone-red dark:border-zinc-950 dark:bg-zinc-800 dark:group-hover:bg-accent-red" />
+            {/* Left accent bar on hover */}
+            <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
-            <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
-              <div>
-                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
-                  {item.company}
-                </h3>
-                <p className="text-sm font-medium text-telephone-red dark:text-accent-red">{item.role}</p>
+            <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+              <div className="flex items-start gap-4">
+                {/* Index */}
+                <span className="font-mono text-[10px] font-black text-muted-foreground mt-1 tabular-nums">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="text-xl font-mono font-black text-foreground group-hover:text-primary transition-colors">
+                    {item.company}
+                  </h3>
+                  <p className="text-sm font-mono text-muted-foreground mt-0.5">{item.role}</p>
+                </div>
               </div>
-              <span className="rounded-full bg-zinc-50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-zinc-500 tabular-nums dark:bg-zinc-900/50">
+              <span className="bg-secondary border border-border px-3 py-1 text-[10px] font-mono font-black uppercase tracking-widest text-primary tabular-nums whitespace-nowrap">
                 {item.duration}
               </span>
             </div>
 
-            <p className="max-w-3xl text-[15px] leading-relaxed text-zinc-500 dark:text-zinc-400">
+            <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground pl-8">
               {item.description}
             </p>
 
@@ -37,7 +45,7 @@ export default function WorkExperience({ work = [] }) {
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 flex w-fit items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-zinc-400 transition-colors hover:text-telephone-red dark:hover:text-accent-red"
+                className="pl-8 mt-1 flex w-fit items-center gap-1.5 text-[10px] font-mono font-black uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
               >
                 Official Site
                 <ArrowUpRight className="h-3.5 w-3.5" />
@@ -49,3 +57,16 @@ export default function WorkExperience({ work = [] }) {
     </section>
   );
 }
+
+WorkExperience.propTypes = {
+  work: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      company: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+      duration: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      link: PropTypes.string
+    })
+  )
+};

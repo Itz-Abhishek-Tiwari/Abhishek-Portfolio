@@ -1,24 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Phone, Mail } from "lucide-react";
 
 export default function FloatingContact() {
     const [isOpen, setIsOpen] = useState(false);
-    const [showButton, setShowButton] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 300) {
-                setShowButton(true);
-            } else {
-                setShowButton(false);
-                setIsOpen(false);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    const [showButton, setShowButton] = useState(true);
 
     return (
         <div className="fixed bottom-6 right-6 z-50">
@@ -29,65 +15,76 @@ export default function FloatingContact() {
                         <AnimatePresence>
                             {isOpen && (
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.9, y: 10, x: -20 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
-                                    exit={{ opacity: 0, scale: 0.9, y: 10, x: -20 }}
-                                    className="absolute bottom-16 right-0 mb-4 w-64 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
+                                    initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.95, y: 8 }}
+                                    className="absolute bottom-20 right-0 mb-2 w-72 overflow-hidden border border-border bg-background shadow-2xl shadow-black/50"
                                 >
-                                    <div className="bg-telephone-red p-4 text-white dark:bg-accent-red">
-                                        <p className="text-sm font-medium">Let's build something</p>
-                                        <p className="text-xs opacity-80">I usually respond in under 24h</p>
+                                    {/* Header */}
+                                    <div className="bg-primary p-5 text-primary-foreground border-b border-primary/20">
+                                        <p className="text-xs font-mono font-black uppercase tracking-widest">Let&apos;s build something</p>
+                                        <p className="text-xs opacity-70 mt-1 font-mono">I usually respond in under 24h</p>
                                     </div>
-                                    <div className="p-2">
+
+                                    {/* Contact options */}
+                                    <div className="p-2 bg-background">
                                         <a
                                             href="mailto:abhitiwariabhi7@gmail.com"
-                                            className="flex items-center gap-3 rounded-xl p-3 text-zinc-600 transition-colors hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                                            className="flex items-center gap-4 p-4 transition-all hover:bg-secondary/50 group border-b border-border/50"
                                         >
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
-                                                <Mail className="h-5 w-5 text-telephone-red dark:text-accent-red" />
+                                            <div className="flex h-9 w-9 items-center justify-center bg-secondary border border-border group-hover:bg-primary group-hover:border-primary transition-colors">
+                                                <Mail className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                                             </div>
                                             <div>
-                                                <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">Email Me</p>
-                                                <p className="text-[10px]">abhitiwariabhi7@gmail.com</p>
+                                                <p className="text-xs font-mono font-black text-foreground">Email Me</p>
+                                                <p className="text-[10px] font-mono text-muted-foreground">abhitiwariabhi7@gmail.com</p>
                                             </div>
                                         </a>
                                         <a
                                             href="tel:6268393044"
-                                            className="flex items-center gap-3 rounded-xl p-3 text-zinc-600 transition-colors hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                                            className="flex items-center gap-4 p-4 transition-all hover:bg-secondary/50 group"
                                         >
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
-                                                <Phone className="h-5 w-5 text-foliage-green dark:text-accent-green" />
+                                            <div className="flex h-9 w-9 items-center justify-center bg-secondary border border-border group-hover:bg-primary group-hover:border-primary transition-colors">
+                                                <Phone className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                                             </div>
                                             <div>
-                                                <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">Call Me</p>
-                                                <p className="text-[10px]">626-8393-044</p>
+                                                <p className="text-xs font-mono font-black text-foreground">Call Me</p>
+                                                <p className="text-[10px] font-mono text-muted-foreground">626-8393-044</p>
                                             </div>
                                         </a>
-                                        <a
-                                            href="/contact"
-                                            className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-zinc-900 py-3 text-xs font-medium text-white transition-all hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-zinc-200"
-                                        >
-                                            <Send className="h-3.5 w-3.5" />
-                                            View Contact Page
-                                        </a>
+                                        <div className="mt-2 pt-2 border-t border-border px-2 pb-2">
+                                            <a
+                                                href="/contact"
+                                                className="vercel-button-primary w-full py-3 text-[10px] gap-2 justify-center"
+                                            >
+                                                <Send className="h-3.5 w-3.5" />
+                                                Full Contact Page
+                                            </a>
+                                        </div>
                                     </div>
                                 </motion.div>
                             )}
                         </AnimatePresence>
 
-                        {/* Main Toggle Button */}
+                        {/* Main Toggle Button — square, Gruvbox yellow */}
                         <motion.button
-                            initial={{ opacity: 0, scale: 0.5, rotate: -45 }}
-                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                            exit={{ opacity: 0, scale: 0.5, rotate: 45 }}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
                             onClick={() => setIsOpen(!isOpen)}
-                            className="flex h-14 w-14 items-center justify-center rounded-full bg-zinc-950 text-white shadow-2xl transition-transform hover:scale-110 active:scale-95 dark:bg-zinc-50 dark:text-zinc-950"
+                            className="flex h-14 w-14 items-center justify-center bg-primary text-primary-foreground shadow-2xl shadow-black/40 transition-all hover:bg-accent hover:scale-105 active:scale-95"
                         >
-                            {isOpen ? (
-                                <X className="h-6 w-6" />
-                            ) : (
-                                <MessageSquare className="h-6 w-6 fill-current" />
-                            )}
+                            <AnimatePresence mode="wait">
+                                {isOpen ? (
+                                    <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                        <X className="h-6 w-6" />
+                                    </motion.div>
+                                ) : (
+                                    <motion.div key="msg" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                        <MessageSquare className="h-6 w-6 fill-current" />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </motion.button>
                     </div>
                 )}

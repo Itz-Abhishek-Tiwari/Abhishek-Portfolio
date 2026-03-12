@@ -9,6 +9,8 @@ import Reviews from './Reviews';
 import ArticleIndividual from './Article';
 import Footer from './Footer';
 import FloatingContact from './FloatingContact';
+import Atmosphere from './Atmosphere/Atmosphere';
+import Layout from './Layout/Layout';
 
 export {
     Navbar,
@@ -23,4 +25,6 @@ export {
     ArticleIndividual,
     Footer,
     FloatingContact,
+    Atmosphere,
+    Layout
 };

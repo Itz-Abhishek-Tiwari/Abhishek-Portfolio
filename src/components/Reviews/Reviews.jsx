@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import PropTypes from 'prop-types';
 
 export default function Reviews({ review = [] }) {
   const [index, setIndex] = useState(0);
@@ -10,18 +11,22 @@ export default function Reviews({ review = [] }) {
       setIndex((prev) => (prev + 1) % review.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [review?.length]);
+  }, [review]);
 
   if (!review || review.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-4xl border-t border-zinc-200 px-4 py-24 dark:border-zinc-800 sm:px-6">
+    <section className="mx-auto max-w-6xl border-t border-border px-6 py-20">
       <div className="flex flex-col items-center">
-        <h2 className="mb-12 text-sm font-medium uppercase tracking-widest text-zinc-400">
-          Testimonials
-        </h2>
+        <div className="flex items-center gap-3 mb-12">
+          <span className="h-px w-12 bg-primary" />
+          <h2 className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-primary">
+            Testimonials
+          </h2>
+          <span className="h-px w-12 bg-primary" />
+        </div>
 
-        <div className="relative h-48 w-full overflow-hidden lg:h-40">
+        <div className="relative min-h-48 w-full max-w-3xl overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -29,13 +34,20 @@ export default function Reviews({ review = [] }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="flex flex-col items-center text-center"
+              className="flex flex-col items-center text-center px-4"
             >
-              <p className="max-w-2xl text-lg font-medium italic leading-relaxed text-zinc-900 dark:text-zinc-100 sm:text-xl">
-                "{review[index]?.review}"
-              </p>
-              <div className="mt-8 flex items-center gap-3">
-                <div className="h-10 w-10 overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-800">
+              {/* Quote */}
+              <div className="relative mb-6">
+                <span className="absolute -top-4 -left-4 text-4xl font-bold text-primary opacity-50 font-mono">"</span>
+                <p className="max-w-2xl text-lg font-medium italic leading-relaxed text-foreground sm:text-xl px-6">
+                  {review[index]?.review}
+                </p>
+                <span className="absolute -bottom-8 -right-4 text-4xl font-bold text-primary opacity-50 font-mono">"</span>
+              </div>
+
+              {/* Author */}
+              <div className="mt-10 flex items-center gap-4 border border-border bg-secondary/50 px-4 py-3">
+                <div className="h-10 w-10 overflow-hidden border border-border">
                   <img
                     src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${review[index]?.client_name}`}
                     alt={review[index]?.client_name}
@@ -43,20 +55,21 @@ export default function Reviews({ review = [] }) {
                   />
                 </div>
                 <div className="text-left">
-                  <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{review[index]?.client_name}</p>
-                  <p className="text-xs text-zinc-500">{review[index]?.client_designation}</p>
+                  <p className="text-sm font-mono font-black text-foreground">{review[index]?.client_name}</p>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">{review[index]?.client_designation}</p>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        <div className="mt-12 flex justify-center gap-2">
+        {/* Indicators — sharp squares */}
+        <div className="mt-10 flex justify-center gap-2">
           {review.map((_, i) => (
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-1.5 w-1.5 rounded-full transition-all ${i === index ? "bg-zinc-900 w-4 dark:bg-zinc-100" : "bg-zinc-300 dark:bg-zinc-800"
+              className={`h-1.5 transition-all duration-300 ${i === index ? "bg-primary w-8" : "bg-border w-3 hover:bg-muted-foreground"
                 }`}
             />
           ))}
@@ -65,3 +78,13 @@ export default function Reviews({ review = [] }) {
     </section>
   );
 }
+
+Reviews.propTypes = {
+  review: PropTypes.arrayOf(
+    PropTypes.shape({
+      review: PropTypes.string.isRequired,
+      client_name: PropTypes.string.isRequired,
+      client_designation: PropTypes.string.isRequired
+    })
+  )
+};

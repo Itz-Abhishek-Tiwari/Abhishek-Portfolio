@@ -1,75 +1,83 @@
-import { Navbar, Footer, FloatingContact } from "../";
+import { } from "../";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import ReactMarkdown from 'react-markdown';
-import { ArrowLeft, Clock, Calendar } from 'lucide-react';
-import portfolioData from '../../data';
+import ReactMarkdown from "react-markdown";
+import { ArrowLeft } from "lucide-react";
+import portfolioData from "../../data";
 
 export default function ArticleIndividual() {
     const { articleid } = useParams();
     const article = portfolioData.articles.find(a => a.id == articleid);
 
-    if (!article) return <div className="p-20 text-center">Article not found</div>;
+    if (!article) return <div className="p-20 text-center font-mono text-muted-foreground">Article not found</div>;
 
     return (
-        <div className="min-h-screen bg-white transition-colors duration-300 dark:bg-zinc-950">
-            <Navbar />
-            <main className="mx-auto max-w-4xl px-4 py-24 sm:px-6">
+        <div className="min-h-screen bg-transparent relative overflow-hidden">
+
+            <main className="mx-auto max-w-4xl px-6 py-20 relative z-10">
                 <Link
                     to="/articles"
-                    className="group mb-12 flex items-center gap-2 text-sm font-medium text-zinc-500 transition-colors hover:text-telephone-red dark:hover:text-accent-red"
+                    className="group mb-16 inline-flex items-center gap-2 text-[10px] font-mono font-black uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
                 >
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
                     Back to Articles
                 </Link>
 
-                <header className="mb-20 text-center sm:text-left">
-                    <div className="mb-8 flex items-center justify-center sm:justify-start gap-4 text-xs font-semibold uppercase tracking-widest text-zinc-400">
-                        <time dateTime={article.created_at}>{article.created_at}</time>
-                        <span className="h-px w-10 bg-telephone-red dark:bg-accent-red"></span>
-                        <span>{Math.ceil(article.body.length / 1000)} min read</span>
+                <header className="mb-20 border-b border-border pb-12">
+                    {/* Meta */}
+                    <div className="mb-8 flex items-center gap-4 text-[10px] font-mono font-bold uppercase tracking-[0.2em]">
+                        <span className="bg-secondary border border-border px-3 py-1 text-primary">{article.created_at}</span>
+                        <span className="h-px w-8 bg-border" />
+                        <span className="text-muted-foreground">{Math.ceil(article.body.length / 1000)} min read</span>
                     </div>
 
-                    <motion.h1
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="font-serif text-5xl font-medium tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-6xl lg:text-7xl"
+                        className="flex flex-col gap-4"
                     >
-                        {article.title}
-                    </motion.h1>
+                        <div className="flex items-center gap-3">
+                            <span className="h-px w-12 bg-primary" />
+                            <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-primary">Insight</span>
+                        </div>
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-mono font-black tracking-tight text-foreground leading-[1.05]">
+                            {article.title}
+                        </h1>
+                    </motion.div>
                 </header>
 
-                <article className="prose prose-zinc prose-sm sm:prose-base lg:prose-lg max-w-none dark:prose-invert">
+                {/* Article Body */}
+                <article className="prose prose-lg max-w-none font-sans leading-relaxed text-foreground/80">
                     <ReactMarkdown>{article.body}</ReactMarkdown>
                 </article>
 
                 {/* Related Articles */}
-                <section className="mt-32 border-t border-zinc-100 pt-24 dark:border-zinc-900">
-                    <h2 className="font-serif text-3xl font-medium text-zinc-950 dark:text-zinc-50">Related Articles</h2>
-                    <div className="mt-12 space-y-12">
-                        {portfolioData.articles
-                            .filter(a => a.id != articleid)
-                            .slice(0, 2)
-                            .map((article) => (
-                                <Link
-                                    key={article.id}
-                                    to={`/articles/${article.id}`}
-                                    className="group flex flex-col gap-2"
-                                >
-                                    <div className="flex items-center gap-4 text-xs tabular-nums text-zinc-400">
-                                        <time dateTime={article.created_at}>{article.created_at}</time>
-                                        <span className="h-px w-8 bg-zinc-200 group-hover:bg-telephone-red dark:bg-zinc-800 dark:group-hover:bg-accent-red transition-colors"></span>
-                                    </div>
-                                    <h3 className="font-serif text-xl font-medium text-zinc-950 transition-colors group-hover:text-telephone-red dark:text-zinc-50 dark:group-hover:text-accent-red">
-                                        {article.title}
-                                    </h3>
-                                </Link>
-                            ))}
-                    </div>
-                </section>
+                {portfolioData.articles.filter(a => a.id != articleid).length > 0 && (
+                    <section className="mt-32 border-t border-border pt-16">
+                        <div className="flex items-center gap-3 mb-10">
+                            <span className="h-px w-12 bg-primary" />
+                            <h2 className="text-sm font-mono font-black uppercase tracking-widest text-foreground">Discover More</h2>
+                        </div>
+                        <div className="grid grid-cols-1 gap-px sm:grid-cols-2 bg-border border border-border">
+                            {portfolioData.articles
+                                .filter(a => a.id != articleid)
+                                .slice(0, 2)
+                                .map((rel) => (
+                                    <Link
+                                        key={rel.id}
+                                        to={`/articles/${rel.id}`}
+                                        className="group flex flex-col gap-3 p-6 bg-background hover:bg-secondary/30 transition-colors"
+                                    >
+                                        <time className="text-[10px] font-mono text-muted-foreground">{rel.created_at}</time>
+                                        <h3 className="text-lg font-mono font-black text-foreground group-hover:text-primary transition-colors leading-tight">
+                                            {rel.title}
+                                        </h3>
+                                    </Link>
+                                ))}
+                        </div>
+                    </section>
+                )}
             </main>
-            <Footer />
-            <FloatingContact />
         </div>
     );
 }

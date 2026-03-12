@@ -1,65 +1,77 @@
-import { useState } from 'react';
-import { Navbar, Footer, FloatingContact } from '../';
+import { } from '../';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
-import { ArrowLeft, Github, ExternalLink, Code2, Calendar, Share2 } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
 import portfolioData from '../../data';
 
 export default function ProjectIndividual() {
   const { projectid } = useParams();
   const project = portfolioData.projects.find(p => p.id == projectid);
 
-  if (!project) return <div>Project not found</div>;
+  if (!project) return <div className="p-20 text-center font-mono text-muted-foreground">Project not found</div>;
 
   const images = project.image || [];
 
   return (
-    <div className="min-h-screen bg-white transition-colors duration-300 dark:bg-zinc-950">
-      <Navbar />
-      <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+    <div className="min-h-screen bg-transparent relative overflow-hidden">
+
+      <main className="mx-auto max-w-6xl px-6 py-20 relative z-10">
         <Link
           to="/projects"
-          className="group mb-12 flex items-center gap-2 text-sm font-medium text-zinc-500 transition-colors hover:text-telephone-red dark:hover:text-accent-red"
+          className="group mb-16 inline-flex items-center gap-2 text-[10px] font-mono font-black uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
           Back to Projects
         </Link>
 
         {/* Project Header */}
-        <header className="mb-20">
-          <motion.h1
+        <header className="mb-20 border-b border-border pb-12">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-5xl font-medium tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-6xl lg:text-7xl"
+            className="flex flex-col gap-4"
           >
-            {project.project_title}
-          </motion.h1>
-
-          <div className="mt-16 grid grid-cols-1 gap-12 border-t border-zinc-100 pt-12 dark:border-zinc-900 sm:grid-cols-3">
-            <div className="flex flex-col gap-3">
-              <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-zinc-400">The Role</span>
-              <span className="text-base text-zinc-900 dark:text-zinc-100 font-medium">Lead Developer</span>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-12 bg-primary" />
+              <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-primary">Case Study</span>
             </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs uppercase tracking-widest text-zinc-400 font-medium">Stack</span>
-              <div className="flex flex-wrap gap-2">
+            <h1 className="text-4xl md:text-7xl font-mono font-black tracking-tight text-foreground leading-[1.05]">
+              {project.project_title}
+            </h1>
+          </motion.div>
+
+          {/* Project Meta — sharp grid */}
+          <div className="mt-16 grid grid-cols-1 gap-px sm:grid-cols-3 bg-border border border-border">
+            <div className="flex flex-col gap-2 p-6 bg-background">
+              <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-vibrant-blue">Role</span>
+              <span className="text-base font-mono font-bold text-foreground">Lead Developer</span>
+            </div>
+            <div className="flex flex-col gap-3 p-6 bg-background">
+              <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-vibrant-emerald">Stack</span>
+              <div className="flex flex-wrap gap-1.5">
                 {project.skills.map((skill, i) => (
-                  <span key={i} className="text-sm text-zinc-600 dark:text-zinc-400 uppercase tracking-tight">{skill}</span>
+                  <span key={i} className="border border-border bg-secondary/80 px-2.5 py-1 text-[10px] font-mono font-black uppercase tracking-wider text-foreground hover:border-primary/50 transition-colors">
+                    {skill}
+                  </span>
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs uppercase tracking-widest text-zinc-400 font-medium">Links</span>
+            <div className="flex flex-col gap-3 p-6 bg-background">
+              <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-vibrant-purple">Links</span>
               <div className="flex gap-4">
                 {project.git_link && (
-                  <a href={project.git_link} target="_blank" rel="noreferrer" className="text-zinc-600 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50">
+                  <a href={project.git_link} target="_blank" rel="noreferrer"
+                    className="flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground transition-all hover:text-foreground">
                     <Github className="h-5 w-5" />
+                    Source
                   </a>
                 )}
                 {project.live_link && (
-                  <a href={project.live_link} target="_blank" rel="noreferrer" className="text-zinc-600 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50">
+                  <a href={project.live_link} target="_blank" rel="noreferrer"
+                    className="flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground transition-all hover:text-primary">
                     <ExternalLink className="h-5 w-5" />
+                    Live
                   </a>
                 )}
               </div>
@@ -67,61 +79,65 @@ export default function ProjectIndividual() {
           </div>
         </header>
 
-        {/* Image Showcase */}
-        <div className="mb-20 grid grid-cols-1 gap-8">
-          {images.map((img, i) => (
-            <motion.div
-              key={img.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900"
-            >
-              <img
-                src={img.image}
-                alt={img.name}
-                className="h-full w-full object-cover"
-              />
-            </motion.div>
-          ))}
-        </div>
+        {/* Project Images — sharp */}
+        {images.length > 0 && (
+          <div className="mb-20 flex flex-col gap-4 border border-border divide-y divide-border">
+            {images.map((img) => (
+              <motion.div
+                key={img.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="overflow-hidden bg-secondary/30"
+              >
+                <img
+                  src={img.image}
+                  alt={img.name}
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+        )}
 
-        {/* Content */}
-        <article className="prose prose-zinc prose-sm sm:prose-base lg:prose-lg max-w-none dark:prose-invert">
+        {/* Article Content */}
+        <article className="prose prose-lg max-w-none font-sans leading-relaxed text-foreground/80">
           <ReactMarkdown>{project.project_description}</ReactMarkdown>
         </article>
 
         {/* Related Projects */}
-        <section className="mt-32 border-t border-zinc-100 pt-24 dark:border-zinc-900">
-          <h2 className="font-serif text-3xl font-medium text-zinc-950 dark:text-zinc-50">Related Projects</h2>
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
-            {portfolioData.projects
-              .filter(p => p.id != projectid)
-              .slice(0, 2)
-              .map((project) => (
-                <Link
-                  key={project.id}
-                  to={`/projects/${project.id}`}
-                  className="group flex flex-col gap-4"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 transition-all group-hover:border-telephone-red/20 dark:border-zinc-800 dark:bg-zinc-900">
+        {portfolioData.projects.filter(p => p.id != projectid).length > 0 && (
+          <section className="mt-32 border-t border-border pt-16">
+            <div className="flex items-center gap-3 mb-10">
+              <span className="h-px w-12 bg-primary" />
+              <h2 className="text-sm font-mono font-black uppercase tracking-widest text-foreground">Related Projects</h2>
+            </div>
+            <div className="grid grid-cols-1 gap-px sm:grid-cols-2 bg-border border border-border">
+              {portfolioData.projects
+                .filter(p => p.id != projectid)
+                .slice(0, 2)
+                .map((related) => (
+                  <Link
+                    key={related.id}
+                    to={`/projects/${related.id}`}
+                    className="group relative aspect-video overflow-hidden bg-secondary/30"
+                  >
                     <img
-                      src={project.image?.[0]?.image || '/placeholder.svg'}
-                      alt={project.project_title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      src={related.image?.[0]?.image || '/placeholder.svg'}
+                      alt={related.project_title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] brightness-75 group-hover:brightness-100"
                     />
-                  </div>
-                  <h3 className="font-serif text-xl font-medium text-zinc-950 transition-colors group-hover:text-telephone-red dark:text-zinc-50 dark:group-hover:text-accent-red">
-                    {project.project_title}
-                  </h3>
-                </Link>
-              ))}
-          </div>
-        </section>
+                    <div className="absolute inset-x-0 bottom-0 p-5 bg-background/40 backdrop-blur-md border-t border-white/10">
+                      <h3 className="text-sm font-mono font-black text-white group-hover:text-primary transition-colors">
+                        {related.project_title}
+                      </h3>
+                    </div>
+                  </Link>
+                ))}
+            </div>
+          </section>
+        )}
       </main>
-      <Footer />
-      <FloatingContact />
     </div>
   );
 }
-
