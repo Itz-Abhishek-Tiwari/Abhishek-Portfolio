@@ -11,6 +11,7 @@ import Footer from './Footer';
 import FloatingContact from './FloatingContact';
 import Atmosphere from './Atmosphere/Atmosphere';
 import Layout from './Layout/Layout';
+import NowPlaying from './NowPlaying/NowPlaying';
 
 export {
     Navbar,
@@ -26,5 +27,6 @@ export {
     Footer,
     FloatingContact,
     Atmosphere,
-    Layout
+    Layout,
+    NowPlaying
 };

@@ -3,6 +3,7 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import FloatingContact from "../FloatingContact";
 import Atmosphere from "../Atmosphere/Atmosphere";
+import NowPlaying from "../NowPlaying/NowPlaying";
 
 export default function Layout() {
     return (
@@ -10,6 +11,7 @@ export default function Layout() {
             <ScrollRestoration />
             <Atmosphere />
             <Navbar />
+            <NowPlaying />
             <Outlet />
             <Footer />
             <FloatingContact />

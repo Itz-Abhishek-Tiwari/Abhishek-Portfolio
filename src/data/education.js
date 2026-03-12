@@ -13,7 +13,7 @@ const education = [
         "start_date": "2019-04-01",
         "end_date": "2020-04-01",
         "degree": "Grade - XII",
-        "cgpa": 6.5
+        "cgpa": null
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@ const education = [
         "start_date": "2016-04-01",
         "end_date": "2017-04-01",
         "degree": "Grade - X",
-        "cgpa": 6.5
+        "cgpa": null
     }
 ];
 
