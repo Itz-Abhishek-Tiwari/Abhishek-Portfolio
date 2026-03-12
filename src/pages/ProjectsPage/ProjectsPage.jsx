@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import portfolioData from "../../data";
+import Typewriter from "../../components/Typewriter/Typewriter";
 
 export default function ProjectsPage() {
   const [projects] = useState(portfolioData.projects || []);
@@ -42,7 +43,7 @@ export default function ProjectsPage() {
             <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-primary">Portfolio</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-mono font-black tracking-tight text-foreground">
-            Projects<span className="text-primary">_</span>
+            <Typewriter text="Projects" />
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground font-mono">
             A curated collection of technical projects — from full-stack apps to performance-focused experiments. Unified by clean code and intentional design.

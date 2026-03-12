@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Briefcase, Database, Code2 } from "lucide-react"
+import { ArrowRight, Briefcase, Database, Code2, Download } from "lucide-react"
 import { Hero, SocialLinks, Skills, Projects, WorkExperience, Education, Reviews } from '../../components'
 import portfolioData from "../../data"
+import resumePdf from "../../pdf/abhishek_tiwari.pdf"
 
 // Section wrapper for Vercel-style layout
 import PropTypes from 'prop-types';
@@ -82,7 +83,7 @@ export default function Home() {
       <WorkExperience work={work} />
       <Projects projects={projects} />
       <Education education={education} />
-      <Reviews review={review} />
+      {/* <Reviews review={review} /> */}
 
       {/* Connect Section */}
       <section id="connect" className="mx-6 my-24 relative overflow-hidden bg-secondary border border-border p-12 text-center sm:p-24">
@@ -109,6 +110,10 @@ export default function Home() {
             <a href="/contact" className="vercel-button-primary py-4 px-10 gap-2 group">
               Get In Touch
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+            <a href={resumePdf} download="Abhishek_Tiwari_Resume.pdf" className="vercel-button-secondary py-4 px-10 gap-2 group">
+              <Download className="h-4 w-4 text-primary transition-transform group-hover:-translate-y-1" />
+              Download Resume
             </a>
             <a href="mailto:abhitiwariabhi7@gmail.com" className="vercel-button-secondary py-4 px-10 gap-2">
               Send an Email

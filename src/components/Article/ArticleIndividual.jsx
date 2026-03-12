@@ -28,7 +28,7 @@ export default function ArticleIndividual() {
                     <div className="mb-8 flex items-center gap-4 text-[10px] font-mono font-bold uppercase tracking-[0.2em]">
                         <span className="bg-secondary border border-border px-3 py-1 text-primary">{article.created_at}</span>
                         <span className="h-px w-8 bg-border" />
-                        <span className="text-muted-foreground">{Math.ceil(article.body.length / 1000)} min read</span>
+                        <span className="text-muted-foreground">{article.reading_time} min read</span>
                     </div>
 
                     <motion.div
@@ -47,8 +47,8 @@ export default function ArticleIndividual() {
                 </header>
 
                 {/* Article Body */}
-                <article className="prose prose-lg max-w-none font-sans leading-relaxed text-foreground/80">
-                    <ReactMarkdown>{article.body}</ReactMarkdown>
+                <article className="prose prose-lg max-w-none font-sans leading-relaxed text-foreground/80 prose-invert prose-yellow">
+                    <article.component />
                 </article>
 
                 {/* Related Articles */}

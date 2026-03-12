@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import portfolioData from "../../data";
+import Typewriter from "../../components/Typewriter/Typewriter";
 
 export default function ArticlePage() {
   const [articles] = useState(portfolioData.articles || []);
@@ -42,7 +43,7 @@ export default function ArticlePage() {
             <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-primary">Writing</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-mono font-black tracking-tight text-foreground">
-            Articles<span className="text-primary">_</span>
+            <Typewriter text="Articles" />
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground font-mono">
             Thoughts on mobile and backend engineering — React Native, Django, and high-performance systems.
@@ -71,7 +72,7 @@ export default function ArticlePage() {
                 <span className="h-px w-6 bg-border" />
                 <time dateTime={article.created_at}>{article.created_at}</time>
                 <span className="h-px w-6 bg-border" />
-                <span>{Math.ceil(article.body.length / 1000)} min read</span>
+                <span>{article.reading_time} min read</span>
               </div>
 
               {/* Title & Excerpt */}
@@ -80,7 +81,7 @@ export default function ArticlePage() {
                   {article.title}
                 </h2>
                 <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground font-mono max-w-3xl">
-                  {article.body.replace(/[#*`]/g, '').substring(0, 220)}...
+                  {article.body}
                 </p>
               </Link>
 

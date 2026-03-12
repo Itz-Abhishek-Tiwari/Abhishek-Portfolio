@@ -1,0 +1,24 @@
+---
+id: 3
+title: "Mastering React Native Performance: Strategies for 60FPS"
+created_at: "2026-03-12 18:45:00"
+link: null
+images:
+  - id: 10
+    name: "React Native Performance"
+    image: "/uploads/react_native_performance.png"
+---
+
+Performance in React Native is often the line between a good app and a great one. While React Native provides a bridge to native components, the communication over this bridge can become a bottleneck if not managed correctly.
+
+### 1. Optimize Your Lists
+The standard `FlatList` is powerful, but for extremely long or complex lists, it can struggle. Enter **Shopify’s FlashList**. It’s a drop-in replacement that uses cell recycling to minimize memory usage and layout calculations, ensuring buttery-smooth scrolling even with thousands of items.
+
+### 2. Avoid Unnecessary Re-renders
+Every time a parent component re-renders, all its children do too, unless they are memoized. Using `React.memo`, `useMemo`, and `useCallback` effectively can drastically reduce the workload on the JS thread. Tools like `why-did-you-render` are invaluable for identifying these performance leaks.
+
+### 3. Move Heavy Logic to Native
+If you have intense computational tasks (like image processing or complex math), don't do them in JavaScript. Write a **Native Module** in Swift/Kotlin. This keeps the JS thread free to handle user interactions and animations.
+
+### 4. Use the New Architecture
+With Fabric and TurboModules in the new React Native architecture, the bridge is replaced with JSI (JavaScript Interface), allowing direct synchronous communication between JS and Native. This eliminates the serialization overhead and provides even better performance.

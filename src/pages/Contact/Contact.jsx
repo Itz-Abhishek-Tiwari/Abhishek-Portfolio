@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Send, Mail, MapPin, Phone } from "lucide-react";
+import Typewriter from "../../components/Typewriter/Typewriter";
 
 export default function Contact() {
   const [value, setValue] = useState({
@@ -11,14 +12,40 @@ export default function Contact() {
     message: ''
   });
 
+  const [status, setStatus] = useState('idle'); // idle, sending, success, error
+
   function handleChange(e) {
     setValue({ ...value, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Form submitted:", value);
-    alert("Message sent! (Mock)");
+    setStatus('sending');
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          ...value,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus('success');
+        setValue({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setStatus('error');
+    }
   }
 
   return (
@@ -50,7 +77,7 @@ export default function Contact() {
             <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-primary">Contact</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-mono font-black tracking-tight text-foreground">
-            Get in touch<span className="text-primary">_</span>
+            <Typewriter text="Get in touch" />
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground font-mono">
             Have a project in mind or just want to say hi? I&apos;m always open to discussing new opportunities and creative ideas.
@@ -118,11 +145,38 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="vercel-button-primary py-4 px-8 gap-3 text-xs group w-fit"
+                disabled={status === 'sending'}
+                className={`vercel-button-primary py-4 px-8 gap-3 text-xs group w-fit ${status === 'sending' ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                Send Message
-                <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                <Send className={`h-3.5 w-3.5 transition-transform ${status === 'sending' ? '' : 'group-hover:translate-x-1 group-hover:-translate-y-1'}`} />
               </button>
+
+              {status === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-3 border border-primary/20 bg-primary/10 p-4"
+                >
+                  <div className="h-2 w-2 bg-primary" />
+                  <p className="text-xs font-mono text-primary uppercase tracking-wider">
+                    Message received! I'll be in touch soon.
+                  </p>
+                </motion.div>
+              )}
+
+              {status === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-3 border border-red-500/20 bg-red-500/10 p-4"
+                >
+                  <div className="h-2 w-2 bg-red-500" />
+                  <p className="text-xs font-mono text-red-500 uppercase tracking-wider">
+                    Transmission failed. Please try again or use direct email.
+                  </p>
+                </motion.div>
+              )}
             </form>
           </motion.div>
 

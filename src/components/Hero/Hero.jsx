@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, MapPin, Clock, Mail, ArrowRight, Code2, Briefcase, Zap } from "lucide-react";
+import { CheckCircle2, MapPin, Clock, Mail, ArrowRight, Code2, Briefcase, Zap, Download } from "lucide-react";
 import profileImg from "../../assets/profile.png";
+import resumePdf from "../../pdf/abhishek_tiwari.pdf";
+import Typewriter from "../Typewriter/Typewriter";
 
 export default function Hero() {
   const [time, setTime] = useState("");
-  const [displayText, setDisplayText] = useState("");
-  const fullText = "Abhishek Tiwari";
 
   useEffect(() => {
     const updateTime = () => {
@@ -18,21 +18,6 @@ export default function Hero() {
     updateTime();
     const timer = setInterval(updateTime, 1000 * 60);
     return () => clearInterval(timer);
-  }, []);
-
-  // Typewriter effect
-  useEffect(() => {
-    let i = 0;
-    const speed = 80;
-    setDisplayText("");
-    const type = () => {
-      if (i < fullText.length) {
-        setDisplayText(fullText.slice(0, i + 1));
-        i++;
-        setTimeout(type, speed);
-      }
-    };
-    setTimeout(type, 400);
   }, []);
 
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -106,8 +91,7 @@ export default function Hero() {
           className="space-y-4"
         >
           <h1 className="text-5xl md:text-8xl font-mono font-black tracking-tight text-foreground leading-[1.0]">
-            <span className="text-foreground">{displayText}</span>
-            <span className="cursor-blink text-primary">_</span>
+            <Typewriter text="Abhishek Tiwari" />
           </h1>
           <p className="max-w-2xl mx-auto text-base md:text-lg text-muted-foreground font-mono leading-relaxed">
             <span className="text-primary">&gt;</span>{" "}
@@ -121,7 +105,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 mt-12"
+          className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mt-12"
         >
           <a
             href="/contact"
@@ -130,6 +114,14 @@ export default function Hero() {
             <Mail className="h-4 w-4" />
             Contact Me
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
+          <a
+            href={resumePdf}
+            download="Abhishek_Tiwari_Resume.pdf"
+            className="vercel-button-secondary px-8 py-3 h-12 gap-2 text-sm group"
+          >
+            <Download className="h-4 w-4 text-primary transition-transform group-hover:-translate-y-1" />
+            Download Resume
           </a>
           <a
             href="/projects"
