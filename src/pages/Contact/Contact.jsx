@@ -3,8 +3,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Send, Mail, MapPin, Phone } from "lucide-react";
 import Typewriter from "../../components/Typewriter/Typewriter";
+import useSEO from "../../hooks/useSEO";
 
 export default function Contact() {
+  useSEO(
+    "Contact",
+    "Get in touch with Abhishek Tiwari for engineering opportunities, collaborative projects, or technical consulting."
+  );
+
   const [value, setValue] = useState({
     name: '',
     email: '',

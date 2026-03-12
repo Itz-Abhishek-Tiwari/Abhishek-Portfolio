@@ -6,6 +6,29 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abhishek Tiwari | Portfolio</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Portfolio of Abhishek Tiwari - Developer, Designer, and Tech Enthusiast. Showcasing projects in Web Development, Mobile Apps, and Backend Engineering." />
+  <meta name="keywords" content="Abhishek Tiwari, Portfolio, Web Developer, React, Next.js, Backend Engineer" />
+  <meta name="author" content="Abhishek Tiwari" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://itz-abhishek-tiwari.netlify.app/" />
+  <meta property="og:title" content="Abhishek Tiwari | Portfolio" />
+  <meta property="og:description"
+    content="Explore my projects, writing, and technical expertise in full-stack development." />
+  <meta property="og:image" content="https://itz-abhishek-tiwari.netlify.app/profile.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://itz-abhishek-tiwari.netlify.app/" />
+  <meta property="twitter:title" content="Abhishek Tiwari | Portfolio" />
+  <meta property="twitter:description"
+    content="Explore my projects, writing, and technical expertise in full-stack development." />
+  <meta property="twitter:image" content="https://itz-abhishek-tiwari.netlify.app/profile.png" />
+
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +40,23 @@
       const theme = localStorage.getItem('theme') || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
     })();
+  </script>
+
+  <!-- Structured Data (JSON-LD) for SEO & AI Search -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Abhishek Tiwari",
+      "jobTitle": "Full Stack Developer",
+      "url": "https://itz-abhishek-tiwari.netlify.app/",
+      "image": "https://itz-abhishek-tiwari.netlify.app/profile.png",
+      "sameAs": [
+        "https://github.com/Itz-Abhishek-Tiwari",
+        "https://linkedin.com/in/itz-abhishek-tiwari"
+      ],
+      "description": "Full-stack engineer specializing in building high-performance web and mobile applications with React, React Native, and Backend technologies."
+    }
   </script>
 </head>
 

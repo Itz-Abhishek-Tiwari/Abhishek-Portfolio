@@ -4,6 +4,7 @@ import { ArrowRight, Briefcase, Database, Code2, Download } from "lucide-react"
 import { Hero, SocialLinks, Skills, Projects, WorkExperience, Education, Reviews } from '../../components'
 import portfolioData from "../../data"
 import resumePdf from "../../pdf/abhishek_tiwari.pdf"
+import useSEO from "../../hooks/useSEO"
 
 // Section wrapper for Vercel-style layout
 import PropTypes from 'prop-types';
@@ -34,6 +35,11 @@ export default function Home() {
   const [review] = useState(portfolioData.review);
   const [work] = useState(portfolioData.work)
   const [education] = useState(portfolioData.education)
+
+  useSEO(
+    "Developer & Designer",
+    "Portfolio of Abhishek Tiwari - Full-stack engineer specializing in high-performance web and mobile applications with React and Django."
+  );
 
   return (
     <main className="mx-auto pb-24">

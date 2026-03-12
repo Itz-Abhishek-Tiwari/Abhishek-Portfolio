@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://itz-abhishek-tiwari.netlify.app/sitemap.xml

@@ -2,11 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, RefreshCw, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
+import useSEO from "../../hooks/useSEO";
 
 const GRID_SIZE = 20;
 const CANVAS_SIZE = 400; // 20x20 grid
 
 export default function Error() {
+  useSEO(
+    "404 Not Found",
+    "The page you are looking for does not exist. Why not play a game of Snake while you're here?"
+  );
+
   const canvasRef = useRef(null);
   const [direction, setDirection] = useState({ x: 1, y: 0 }); // Move right initially
   const [snake, setSnake] = useState([{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]);

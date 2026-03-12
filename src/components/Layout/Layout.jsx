@@ -12,7 +12,9 @@ export default function Layout() {
             <Atmosphere />
             <Navbar />
             <NowPlaying />
-            <Outlet />
+            <main id="main-content" className="relative z-10">
+                <Outlet />
+            </main>
             <Footer />
             <FloatingContact />
         </>

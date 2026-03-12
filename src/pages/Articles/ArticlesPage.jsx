@@ -4,9 +4,15 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import portfolioData from "../../data";
 import Typewriter from "../../components/Typewriter/Typewriter";
+import useSEO from "../../hooks/useSEO";
 
 export default function ArticlePage() {
   const [articles] = useState(portfolioData.articles || []);
+
+  useSEO(
+    "Articles",
+    "Technical thoughts and deep dives into React Native, Django, and high-performance engineering by Abhishek Tiwari."
+  );
 
   const containerVariants = {
     hidden: { opacity: 0 },

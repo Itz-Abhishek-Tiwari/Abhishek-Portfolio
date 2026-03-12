@@ -30,14 +30,14 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl">
       {/* Scroll Progress Bar — Gruvbox yellow */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-primary origin-left z-[60]"
         style={{ scaleX }}
       />
 
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <div className="flex items-center gap-8">
           {/* Logo — sharp square badge */}
           <Link to="/" className="group flex items-center gap-2.5">
@@ -98,7 +98,7 @@ export default function Navbar() {
             {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
-      </div>
+      </nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -131,6 +131,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 }

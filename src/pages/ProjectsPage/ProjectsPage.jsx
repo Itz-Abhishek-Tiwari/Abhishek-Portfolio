@@ -4,9 +4,15 @@ import { Link } from "react-router-dom";
 import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import portfolioData from "../../data";
 import Typewriter from "../../components/Typewriter/Typewriter";
+import useSEO from "../../hooks/useSEO";
 
 export default function ProjectsPage() {
   const [projects] = useState(portfolioData.projects || []);
+
+  useSEO(
+    "Projects",
+    "Explore a curated collection of full-stack, mobile, and backend projects built by Abhishek Tiwari. Clean code, intentional design, and technical precision."
+  );
 
   const containerVariants = {
     hidden: { opacity: 0 },
