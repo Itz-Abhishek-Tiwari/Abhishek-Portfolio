@@ -5,7 +5,7 @@ import { MessageSquare, X, Send, Phone, Mail } from "lucide-react";
 
 export default function FloatingContact() {
     const [isOpen, setIsOpen] = useState(false);
-    const [showButton, setShowButton] = useState(true);
+    const [showButton] = useState(true);
 
     return (
         <div className="fixed bottom-6 right-6 z-50">

@@ -38,11 +38,11 @@ export default function Reviews({ review = [] }) {
             >
               {/* Quote */}
               <div className="relative mb-6">
-                <span className="absolute -top-4 -left-4 text-4xl font-bold text-primary opacity-50 font-mono">"</span>
+                <span className="absolute -top-4 -left-4 text-4xl font-bold text-primary opacity-50 font-mono">&quot;</span>
                 <p className="max-w-2xl text-lg font-medium italic leading-relaxed text-foreground sm:text-xl px-6">
                   {review[index]?.review}
                 </p>
-                <span className="absolute -bottom-8 -right-4 text-4xl font-bold text-primary opacity-50 font-mono">"</span>
+                <span className="absolute -bottom-8 -right-4 text-4xl font-bold text-primary opacity-50 font-mono">&quot;</span>
               </div>
 
               {/* Author */}

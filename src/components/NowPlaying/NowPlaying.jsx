@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, Youtube, ExternalLink, ChevronRight, ChevronLeft, Volume2, VolumeX } from "lucide-react";
+import { Youtube, ExternalLink, ChevronRight, ChevronLeft, Volume2, VolumeX } from "lucide-react";
 
 export default function NowPlaying() {
     const [isCollapsed, setIsCollapsed] = useState(true);

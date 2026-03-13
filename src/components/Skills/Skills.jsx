@@ -1,14 +1,19 @@
 import { motion } from "framer-motion";
 import { Code2, Terminal, Layers } from "lucide-react";
 import portfolioData from "../../data";
+import Section from "../ui/Section";
 import PropTypes from 'prop-types';
 
-const SkillCard = ({ title, skills, icon: Icon, delay, accentColor }) => (
+const SkillCard = ({ title, skills, icon: Icon, accentColor }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    transition={{ delay, duration: 0.5 }}
+    transition={{ duration: 0.5 }}
+    variants={{
+      hidden: { opacity: 0, y: 10 },
+      visible: { opacity: 1, y: 0 }
+    }}
     className="vercel-card flex flex-col gap-6 p-6 h-full"
     style={{ borderTop: `2px solid ${accentColor}` }}
   >
@@ -41,43 +46,51 @@ SkillCard.propTypes = {
   title: PropTypes.string.isRequired,
   skills: PropTypes.arrayOf(PropTypes.string).isRequired,
   icon: PropTypes.elementType.isRequired,
-  delay: PropTypes.number.isRequired,
   accentColor: PropTypes.string.isRequired
 };
 
 export default function Skills() {
   const { languages = [], frameworks = [], miscellaneous = [] } = portfolioData.skills_list || {};
 
-  return (
-    <section className="relative px-6 py-20 max-w-6xl mx-auto">
-      <div className="mb-12 flex items-center gap-3">
-        <span className="h-px w-12 bg-primary" />
-        <h2 className="text-2xl font-mono font-black uppercase tracking-widest text-foreground">Technical Arsenal</h2>
-      </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.2
+      }
+    }
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+  return (
+    <Section title="Technical Arsenal" id="skills" accentColor="bg-vibrant-purple">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border"
+      >
         <SkillCard
           title="Languages"
           skills={languages}
           icon={Code2}
-          delay={0.1}
           accentColor="var(--vibrant-blue)"
         />
         <SkillCard
           title="Frameworks"
           skills={frameworks}
           icon={Layers}
-          delay={0.2}
           accentColor="var(--vibrant-purple)"
         />
         <SkillCard
           title="Tools & Ecosystem"
           skills={miscellaneous}
           icon={Terminal}
-          delay={0.3}
           accentColor="var(--vibrant-emerald)"
         />
-      </div>
-    </section>
+      </motion.div>
+    </Section>
   );
 }

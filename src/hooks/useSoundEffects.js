@@ -44,7 +44,7 @@ export default function useSoundEffects() {
 
             oscillator.start();
             oscillator.stop(audioCtx.currentTime + 0.05);
-        } catch (e) {
+        } catch {
             // Silent fail
         }
     };
@@ -67,7 +67,7 @@ export default function useSoundEffects() {
 
             oscillator.start();
             oscillator.stop(audioCtx.currentTime + 0.03);
-        } catch (e) {
+        } catch {
             // Silent fail
         }
     };

@@ -166,7 +166,7 @@ export default function Contact() {
                 >
                   <div className="h-2 w-2 bg-primary" />
                   <p className="text-xs font-mono text-primary uppercase tracking-wider">
-                    Message received! I'll be in touch soon.
+                    Message received! I&apos;ll be in touch soon.
                   </p>
                 </motion.div>
               )}

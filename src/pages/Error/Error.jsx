@@ -108,7 +108,7 @@ export default function Error() {
 
     const intervalId = setInterval(moveSnake, 100); // Game speed
     return () => clearInterval(intervalId);
-  }, [direction, food, gameStarted, gameOver]);
+  }, [direction, food, gameStarted, gameOver, handleGameOver]);
 
   // Canvas Drawing
   useEffect(() => {
@@ -163,7 +163,6 @@ export default function Error() {
         y: Math.floor(Math.random() * GRID_SIZE),
       };
       // Ensure food doesn't spawn on snake
-      // eslint-disable-next-line no-loop-func
       if (!currentSnake.some((segment) => segment.x === newFood.x && segment.y === newFood.y)) {
         break;
       }
@@ -207,7 +206,7 @@ export default function Error() {
           Page Not Found
         </h2>
         <p className="text-muted-foreground font-mono text-sm">
-          But hey, while you're lost in the void, play some Snake!
+          But hey, while you&apos;re lost in the void, play some Snake!
         </p>
       </motion.div>
 

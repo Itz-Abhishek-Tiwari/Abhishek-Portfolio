@@ -364,6 +364,7 @@
 .vibrant-blob {
   @apply absolute -z-10 blur-[120px] opacity-20;
   animation: vibrant-float 20s ease-in-out infinite;
+  will-change: transform;
 }
 
 .glow-blue {
@@ -418,6 +419,7 @@
   @apply absolute h-[1px] w-full opacity-15;
   background: linear-gradient(90deg, transparent, var(--beam-color, #fabd2f), transparent);
   animation: beam-move 8s linear infinite;
+  will-change: transform;
 }
 
 @keyframes beam-move {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 /**
  * Typewriter component for animating text appearance.
@@ -41,3 +42,11 @@ export default function Typewriter({
         </span>
     );
 }
+
+Typewriter.propTypes = {
+    text: PropTypes.string.isRequired,
+    speed: PropTypes.number,
+    delay: PropTypes.number,
+    className: PropTypes.string,
+    showCursor: PropTypes.bool
+};

@@ -12,6 +12,12 @@ import FloatingContact from './FloatingContact';
 import Atmosphere from './Atmosphere/Atmosphere';
 import Layout from './Layout/Layout';
 import NowPlaying from './NowPlaying/NowPlaying';
+import About from './About/About';
+import Connect from './Connect/Connect';
+import Section from './ui/Section';
+import PageHeader from './ui/PageHeader';
+
+
 
 export {
     Navbar,
@@ -28,5 +34,9 @@ export {
     FloatingContact,
     Atmosphere,
     Layout,
-    NowPlaying
+    NowPlaying,
+    About,
+    Connect,
+    Section,
+    PageHeader
 };

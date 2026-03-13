@@ -93,6 +93,7 @@ export default function ProjectIndividual() {
                 <img
                   src={img.image}
                   alt={img.name}
+                  loading="lazy"
                   className="h-full w-full object-cover"
                 />
               </motion.div>
@@ -125,6 +126,7 @@ export default function ProjectIndividual() {
                     <img
                       src={related.image?.[0]?.image || '/placeholder.svg'}
                       alt={related.project_title}
+                      loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] brightness-75 group-hover:brightness-100"
                     />
                     <div className="absolute inset-x-0 bottom-0 p-5 bg-background/40 backdrop-blur-md border-t border-white/10">

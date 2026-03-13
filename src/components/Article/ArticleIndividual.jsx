@@ -1,7 +1,7 @@
-import { } from "../";
+
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import ReactMarkdown from "react-markdown";
+
 import { ArrowLeft } from "lucide-react";
 import portfolioData from "../../data";
 

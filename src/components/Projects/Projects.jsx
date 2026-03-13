@@ -37,6 +37,7 @@ export default function Projects({ projects = [] }) {
               <img
                 src={project.image?.[0]?.image || "/placeholder.svg"}
                 alt={project.project_title}
+                loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] brightness-90 group-hover:brightness-100"
               />
               {/* Gruvbox overlay on hover */}
