@@ -1,14 +1,21 @@
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import FloatingContact from "../FloatingContact";
 import Atmosphere from "../Atmosphere/Atmosphere";
 import NowPlaying from "../NowPlaying/NowPlaying";
 import useSoundEffects from "../../hooks/useSoundEffects";
-import { useEffect } from "react";
+import useEasterEggs from "../../hooks/useEasterEggs";
+import KeyboardShortcutsModal from "../ui/KeyboardShortcutsModal";
+import MatrixOverlay from "../ui/MatrixOverlay";
+import { useEffect, useState } from "react";
 
 export default function Layout() {
     const { playClick, playTyping } = useSoundEffects();
+    const navigate = useNavigate();
+
+    const [shortcutsOpen, setShortcutsOpen] = useState(false);
+    const [matrixActive, setMatrixActive] = useState(false);
 
     useEffect(() => {
         const handleGlobalClick = (e) => {
@@ -34,6 +41,13 @@ export default function Layout() {
         };
     }, [playClick, playTyping]);
 
+    // Easter egg hooks
+    useEasterEggs({
+        onShortcutsOpen: () => setShortcutsOpen(true),
+        onKonami: () => setMatrixActive(true),
+        navigate,
+    });
+
     return (
         <>
             <ScrollRestoration />
@@ -45,6 +59,16 @@ export default function Layout() {
             </main>
             <Footer />
             <FloatingContact />
+
+            {/* Easter Eggs */}
+            <KeyboardShortcutsModal
+                isOpen={shortcutsOpen}
+                onClose={() => setShortcutsOpen(false)}
+            />
+            <MatrixOverlay
+                isVisible={matrixActive}
+                onDone={() => setMatrixActive(false)}
+            />
         </>
     );
 }

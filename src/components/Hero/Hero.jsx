@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, MapPin, Clock, Mail, ArrowRight, Code2, Briefcase, Zap, Download } from "lucide-react";
+import { CheckCircle2, MapPin, Clock, Mail, ArrowRight, Code2, Briefcase, Zap, Download, ChevronDown } from "lucide-react";
 import profileImg from "../../assets/profile.png";
 import resumePdf from "../../pdf/abhishek_tiwari.pdf";
 import { Link } from "react-router-dom";
@@ -23,14 +23,34 @@ export default function Hero() {
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+    }
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-24 overflow-hidden bg-transparent">
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center text-center">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center text-center"
+      >
         {/* Status Badge — sharp, terminal-style */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          variants={childVariants}
           className="mb-8 flex items-center gap-2 border border-border bg-secondary/80 px-4 py-2 text-xs font-mono font-bold backdrop-blur-md"
         >
           <span className="relative flex h-2 w-2">
@@ -47,14 +67,10 @@ export default function Hero() {
 
         {/* Profile Image — SQUARE (no rounded corners) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          variants={childVariants}
           className="relative mb-8"
         >
-          {/* Gruvbox yellow glow on hover */}
           <div className="absolute -inset-3 bg-primary/10 blur-xl opacity-0 hover:opacity-100 transition-opacity duration-700" />
-          {/* Sharp square border with accent corners */}
           <div className="relative">
             {/* Corner accents */}
             <span className="absolute -top-1 -left-1 h-4 w-4 border-t-2 border-l-2 border-primary z-10" />
@@ -62,21 +78,15 @@ export default function Hero() {
             <span className="absolute -bottom-1 -left-1 h-4 w-4 border-b-2 border-l-2 border-primary z-10" />
             <span className="absolute -bottom-1 -right-1 h-4 w-4 border-b-2 border-r-2 border-primary z-10" />
             <div className="relative h-36 w-36 md:h-44 md:w-44 border-2 border-border overflow-hidden bg-secondary">
-              {/* Skeleton State */}
+              {/* Shimmer skeleton */}
               {!imageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-full w-full bg-gradient-to-r from-secondary via-border/50 to-secondary animate-pulse" />
-                  <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                    Initializing...
-                  </div>
-                </div>
+                <div className="absolute inset-0 shimmer" />
               )}
               <img
                 src={profileImg}
                 alt="Abhishek Tiwari"
                 onLoad={() => setImageLoaded(true)}
-                className={`h-full w-full object-cover transition-all duration-700 hover:scale-105 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                  }`}
+                className={`h-full w-full object-cover transition-all duration-700 hover:scale-105 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
               />
               {/* Online indicator */}
               <div className="absolute bottom-2 right-2 h-3 w-3 border-2 border-background bg-primary" />
@@ -84,13 +94,8 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Main Heading — Typewriter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="space-y-4"
-        >
+        {/* Main Heading */}
+        <motion.div variants={childVariants} className="space-y-4">
           <h1 className="text-5xl md:text-8xl font-mono font-black tracking-tight text-foreground leading-[1.0]">
             <Typewriter text="Abhishek Tiwari" />
           </h1>
@@ -101,17 +106,12 @@ export default function Hero() {
           </p>
         </motion.div>
 
-        {/* CTAs — fully sharp */}
+        {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          variants={childVariants}
           className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mt-12"
         >
-          <Link
-            to="/contact"
-            className="vercel-button-primary px-8 py-3 h-12 gap-2 text-sm group"
-          >
+          <Link to="/contact" className="vercel-button-primary px-8 py-3 h-12 gap-2 text-sm group">
             <Mail className="h-4 w-4" />
             Contact Me
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -124,37 +124,43 @@ export default function Hero() {
             <Download className="h-4 w-4 text-primary transition-transform group-hover:-translate-y-1" />
             Download Resume
           </a>
-          <Link
-            to="/projects"
-            className="vercel-button-secondary px-8 py-3 h-12 gap-2 text-sm"
-          >
+          <Link to="/projects" className="vercel-button-secondary px-8 py-3 h-12 gap-2 text-sm">
             <Zap className="h-4 w-4 text-primary" />
             View Projects
           </Link>
         </motion.div>
 
-        {/* Quick Stats — sharp cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 w-full border border-border bg-border">
+        {/* Quick Stats */}
+        <motion.div
+          variants={childVariants}
+          className="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 w-full border border-border bg-border"
+        >
           {[
             { icon: Code2, label: "Thoughtwin", sub: "React Native Dev", color: "text-vibrant-cyan" },
             { icon: Briefcase, label: "Ideal IT", sub: "Backend Engineer", color: "text-vibrant-orange" },
             { icon: MapPin, label: "Indore", sub: "India · UTC+5:30", color: "text-vibrant-emerald" },
             { icon: Clock, label: time, sub: "Local Time", color: "text-primary" },
           ].map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 + (i * 0.1) }}
-              className="flex flex-col items-center p-4 bg-background border-0 transition-colors hover:bg-secondary/50 group"
+              className="flex flex-col items-center p-4 bg-background transition-colors hover:bg-secondary/50 group"
             >
               <item.icon className={`h-5 w-5 mb-2 ${item.color} transition-transform group-hover:scale-110`} />
               <span className="text-sm font-mono font-bold text-foreground">{item.label}</span>
               <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">{item.sub}</span>
-            </motion.div>
+            </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+
+        {/* Scroll down indicator */}
+        <motion.div
+          variants={childVariants}
+          className="mt-16 flex flex-col items-center gap-2 text-muted-foreground/50"
+        >
+          <span className="text-[9px] font-mono uppercase tracking-[0.3em]">Scroll to explore</span>
+          <ChevronDown className="h-4 w-4 animate-scroll-bounce" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

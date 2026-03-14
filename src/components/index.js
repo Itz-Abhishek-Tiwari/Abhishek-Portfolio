@@ -20,6 +20,8 @@ import GitHubCalendar from './GitHub/GitHubCalendar';
 import RepoMeta from './GitHub/RepoMeta';
 import Section from './ui/Section';
 import PageHeader from './ui/PageHeader';
+import KeyboardShortcutsModal from './ui/KeyboardShortcutsModal';
+import MatrixOverlay from './ui/MatrixOverlay';
 
 
 
@@ -46,5 +48,7 @@ export {
     GitHubCalendar,
     RepoMeta,
     Section,
-    PageHeader
+    PageHeader,
+    KeyboardShortcutsModal,
+    MatrixOverlay
 };

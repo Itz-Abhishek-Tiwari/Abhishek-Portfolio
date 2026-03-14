@@ -106,7 +106,8 @@ export default function Contact() {
                     type="text"
                     id="name"
                     name="name"
-                    className="border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50"
+                    value={value.name}
+                    className="border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-primary/30"
                     placeholder="Abhishek Tiwari"
                     onChange={handleChange}
                     required
@@ -118,7 +119,8 @@ export default function Contact() {
                     type="email"
                     id="email"
                     name="email"
-                    className="border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50"
+                    value={value.email}
+                    className="border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-primary/30"
                     placeholder="you@email.com"
                     onChange={handleChange}
                     required
@@ -131,7 +133,8 @@ export default function Contact() {
                   type="text"
                   id="subject"
                   name="subject"
-                  className="border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50"
+                  value={value.subject}
+                  className="border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-primary/30"
                   placeholder="Inquiry about..."
                   onChange={handleChange}
                   required
@@ -142,8 +145,9 @@ export default function Contact() {
                 <textarea
                   id="message"
                   name="message"
+                  value={value.message}
                   rows="7"
-                  className="resize-none border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50"
+                  className="resize-none border border-border bg-secondary/30 px-4 py-3 text-sm font-mono text-foreground outline-none transition-all focus:border-primary focus:bg-secondary/50 placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-primary/30"
                   placeholder="Tell me more about your project..."
                   onChange={handleChange}
                   required

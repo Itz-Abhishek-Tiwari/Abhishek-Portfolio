@@ -1,18 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Github, Menu, X, ArrowRight, Terminal } from "lucide-react";
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
-import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoGlitch, setLogoGlitch] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
   const location = useLocation();
 
-  // Theme initialization moved to local storage check in main.jsx/ThemeToggle
-  // But let's ensure the root has common gruvbox class if needed (optional)
+  // Theme Toggle Logic
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'dark';
+    }
+    return 'dark';
+  });
+
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    document.documentElement.setAttribute("data-theme", savedTheme);
+    const root = window.document.documentElement;
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  // Close mobile menu on ESC
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") setIsMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
   const { scrollYProgress } = useScroll();
@@ -29,6 +55,19 @@ export default function Navbar() {
     { label: "Contact", path: "/contact" },
   ];
 
+  // Triple-click logo → glitch easter egg
+  const handleLogoClick = useCallback(() => {
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+    if (newCount >= 3) {
+      setClickCount(0);
+      setLogoGlitch(true);
+      setTimeout(() => setLogoGlitch(false), 1500);
+    }
+    // Reset count if too slow
+    setTimeout(() => setClickCount(0), 600);
+  }, [clickCount]);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl">
       {/* Scroll Progress Bar — Gruvbox yellow */}
@@ -39,12 +78,17 @@ export default function Navbar() {
 
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <div className="flex items-center gap-8">
-          {/* Logo — sharp square badge */}
-          <Link to="/" className="group flex items-center gap-2.5">
+          {/* Logo — triple-click for glitch easter egg */}
+          <Link
+            to="/"
+            className="group flex items-center gap-2.5"
+            onClick={handleLogoClick}
+            title="abhishek_ (click 3x for a surprise)"
+          >
             <div className="flex h-8 w-8 items-center justify-center bg-primary font-mono text-sm font-black text-primary-foreground transition-all group-hover:bg-accent">
               <Terminal className="h-4 w-4" />
             </div>
-            <span className="font-mono text-base font-bold tracking-tight text-foreground">
+            <span className={`font-mono text-base font-bold tracking-tight text-foreground transition-all ${logoGlitch ? "animate-glitch" : ""}`}>
               abhishek<span className="text-primary">_</span>
             </span>
           </Link>
@@ -80,22 +124,45 @@ export default function Navbar() {
             href="https://github.com/Itz-Abhishek-Tiwari"
             target="_blank"
             rel="noreferrer"
+            title="GitHub Profile"
             className="flex h-8 w-8 items-center justify-center border border-transparent text-muted-foreground transition-all hover:border-border hover:bg-secondary hover:text-foreground"
           >
             <Github className="h-4 w-4" />
           </a>
 
-          {/* Unified Theme Toggle & Branding */}
-          <div className="flex items-center">
-            <ThemeToggle />
-          </div>
+          {/* Functional GRUVBOX badge (Theme Toggle) */}
+          <button
+            onClick={toggleTheme}
+            className="flex items-center border border-border bg-secondary/30 h-8 px-3 gap-2 transition-all hover:bg-secondary/60 hover:border-primary/40 group active:scale-95"
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            <div className="relative flex h-1.5 w-1.5 shrink-0">
+              <span className={`h-full w-full bg-primary ${theme === 'dark' ? 'animate-pulse' : ''}`} />
+              <span className="absolute inset-0 bg-primary blur-[4px] opacity-0 group-hover:opacity-100 transition-opacity" />
+              <span className="absolute inset-0 bg-primary/40 group-hover:animate-ping" />
+            </div>
+            <span className="text-[10px] font-mono font-black uppercase tracking-[0.3em] text-muted-foreground transition-all group-hover:text-foreground whitespace-nowrap">
+              {theme === 'dark' ? 'Dark' : 'Light'}
+            </span>
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex h-8 w-8 items-center justify-center bg-secondary border border-border text-foreground transition-all hover:bg-muted md:hidden"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            <AnimatePresence mode="wait">
+              {isMenuOpen ? (
+                <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <X className="h-4 w-4" />
+                </motion.div>
+              ) : (
+                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <Menu className="h-4 w-4" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </div>
       </nav>
@@ -107,6 +174,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             className="absolute left-0 right-0 top-full border-b border-border bg-background md:hidden shadow-2xl overflow-hidden"
           >
             <div className="flex flex-col p-4 gap-1">
@@ -123,7 +191,7 @@ export default function Navbar() {
                       }`}
                   >
                     {link.label}
-                    <ArrowRight className={`h-4 w-4 transition-transform ${isActive ? "text-primary" : "opacity-0"}`} />
+                    <ArrowRight className={`h-4 w-4 transition-all ${isActive ? "text-primary" : "opacity-0 -translate-x-2"}`} />
                   </Link>
                 );
               })}
