@@ -324,7 +324,7 @@ html {
   }
 
   .vercel-button-primary:hover {
-    @apply opacity-90 shadow-[0_0_20px_rgba(250, 189, 47, 0.3)];
+    @apply opacity-90 shadow-[0_0_20px_rgba(250,189,47,0.3)];
   }
 
   .vercel-button-secondary {
