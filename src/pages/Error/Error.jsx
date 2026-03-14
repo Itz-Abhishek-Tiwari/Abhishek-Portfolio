@@ -72,6 +72,30 @@ export default function Error() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [direction, gameStarted, gameOver]);
 
+  const generateFood = (currentSnake) => {
+    let newFood;
+    while (true) {
+      newFood = {
+        x: Math.floor(Math.random() * GRID_SIZE),
+        y: Math.floor(Math.random() * GRID_SIZE),
+      };
+      // Ensure food doesn't spawn on snake
+      if (!currentSnake.some((segment) => segment.x === newFood.x && segment.y === newFood.y)) {
+        break;
+      }
+    }
+    return newFood;
+  };
+
+  const handleGameOver = () => {
+    setGameOver(true);
+    setGameStarted(false);
+    if (score > highScore) {
+      setHighScore(score);
+      localStorage.setItem('snakeHighScore', score.toString());
+    }
+  };
+
   // Game Loop
   useEffect(() => {
     if (!gameStarted || gameOver) return;
@@ -155,29 +179,6 @@ export default function Error() {
     });
   }, [snake, food]);
 
-  const generateFood = (currentSnake) => {
-    let newFood;
-    while (true) {
-      newFood = {
-        x: Math.floor(Math.random() * GRID_SIZE),
-        y: Math.floor(Math.random() * GRID_SIZE),
-      };
-      // Ensure food doesn't spawn on snake
-      if (!currentSnake.some((segment) => segment.x === newFood.x && segment.y === newFood.y)) {
-        break;
-      }
-    }
-    return newFood;
-  };
-
-  const handleGameOver = () => {
-    setGameOver(true);
-    setGameStarted(false);
-    if (score > highScore) {
-      setHighScore(score);
-      localStorage.setItem('snakeHighScore', score.toString());
-    }
-  };
 
   const resetGame = () => {
     setSnake([{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]);

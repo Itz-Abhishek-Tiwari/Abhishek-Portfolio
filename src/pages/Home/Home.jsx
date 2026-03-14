@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Hero, SocialLinks, Skills, Projects, WorkExperience, Education, About, Connect } from '../../components'
+import { Hero, SocialLinks, Skills, Projects, WorkExperience, Education, About, Connect, GitHubStats, GitHubProjects, GitHubCalendar } from '../../components'
 import portfolioData from "../../data"
 import useSEO from "../../hooks/useSEO"
 
@@ -21,7 +21,10 @@ export default function Home() {
       <About />
       <Skills />
       <WorkExperience work={work} />
+      <GitHubStats />
       <Projects projects={projects} />
+      {/* <GitHubCalendar /> */}
+      <GitHubProjects />
       <Education education={education} />
       {/* <Reviews review={review} /> */}
       <Connect />

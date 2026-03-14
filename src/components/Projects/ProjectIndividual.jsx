@@ -1,4 +1,4 @@
-import { } from '../';
+import { RepoMeta } from '../';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
@@ -59,20 +59,27 @@ export default function ProjectIndividual() {
             </div>
             <div className="flex flex-col gap-3 p-6 bg-background">
               <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-vibrant-purple">Links</span>
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-4">
+                  {project.git_link && (
+                    <a href={project.git_link} target="_blank" rel="noreferrer"
+                      className="flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground transition-all hover:text-foreground">
+                      <Github className="h-5 w-5" />
+                      Source
+                    </a>
+                  )}
+                  {project.live_link && (
+                    <a href={project.live_link} target="_blank" rel="noreferrer"
+                      className="flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground transition-all hover:text-primary">
+                      <ExternalLink className="h-5 w-5" />
+                      Live
+                    </a>
+                  )}
+                </div>
                 {project.git_link && (
-                  <a href={project.git_link} target="_blank" rel="noreferrer"
-                    className="flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground transition-all hover:text-foreground">
-                    <Github className="h-5 w-5" />
-                    Source
-                  </a>
-                )}
-                {project.live_link && (
-                  <a href={project.live_link} target="_blank" rel="noreferrer"
-                    className="flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground transition-all hover:text-primary">
-                    <ExternalLink className="h-5 w-5" />
-                    Live
-                  </a>
+                  <div className="pt-2 border-t border-border/50">
+                    <RepoMeta url={project.git_link} />
+                  </div>
                 )}
               </div>
             </div>
@@ -140,6 +147,6 @@ export default function ProjectIndividual() {
           </section>
         )}
       </main>
-    </div>
+    </div >
   );
 }

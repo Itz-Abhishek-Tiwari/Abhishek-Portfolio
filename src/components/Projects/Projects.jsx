@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import PropTypes from 'prop-types';
+import { RepoMeta } from '../';
 
 export default function Projects({ projects = [] }) {
   return (
@@ -80,6 +81,7 @@ export default function Projects({ projects = [] }) {
                   View Details
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </Link>
+                {project.git_link && <RepoMeta url={project.git_link} />}
                 <div className="flex items-center gap-4 ml-auto">
                   {project.git_link && (
                     <a href={project.git_link} target="_blank" rel="noreferrer"

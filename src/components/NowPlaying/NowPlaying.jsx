@@ -122,7 +122,7 @@ export default function NowPlaying() {
         <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="fixed bottom-6 left-6 z-40 flex items-center bg-secondary/90 backdrop-blur-md border border-border shadow-2xl overflow-hidden h-16"
+            className="fixed bottom-6 left-6 z-40 flex items-center bg-secondary/90 backdrop-blur-md border border-border shadow-2xl overflow-hidden h-14 md:h-16 max-w-[calc(100vw-48px)] md:max-w-md"
         >
             <div id="youtube-player" style={{ position: 'absolute', visibility: 'hidden' }}></div>
 
@@ -172,17 +172,17 @@ export default function NowPlaying() {
                             exit={{ width: 0, opacity: 0 }}
                             className="flex items-center overflow-hidden"
                         >
-                            <div className="flex flex-col ml-3 min-w-[120px]">
+                            <div className="flex flex-col ml-3 min-w-[80px] md:min-w-[120px]">
                                 <div className="flex items-center gap-2">
-                                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-primary/70">
+                                    <span className="text-[8px] md:text-[9px] font-mono font-bold uppercase tracking-wider text-primary/70">
                                         Now listening
                                     </span>
-                                    <Youtube className="w-3 h-3 text-vibrant-red" />
+                                    <Youtube className="w-2.5 h-2.5 md:w-3 md:h-3 text-vibrant-red" />
                                 </div>
-                                <h4 className="text-[11px] font-mono font-black text-foreground truncate max-w-[130px]">
+                                <h4 className="text-[10px] md:text-[11px] font-mono font-black text-foreground truncate max-w-[100px] md:max-w-[130px]">
                                     Tum Se Hi
                                 </h4>
-                                <p className="text-[9px] font-mono text-muted-foreground truncate max-w-[130px]">
+                                <p className="text-[8px] md:text-[9px] font-mono text-muted-foreground truncate max-w-[100px] md:max-w-[130px]">
                                     Mohit Chauhan
                                 </p>
                             </div>

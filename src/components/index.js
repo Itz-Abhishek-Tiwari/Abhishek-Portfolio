@@ -14,6 +14,10 @@ import Layout from './Layout/Layout';
 import NowPlaying from './NowPlaying/NowPlaying';
 import About from './About/About';
 import Connect from './Connect/Connect';
+import GitHubStats from './GitHub/GitHubStats';
+import GitHubProjects from './GitHub/GitHubProjects';
+import GitHubCalendar from './GitHub/GitHubCalendar';
+import RepoMeta from './GitHub/RepoMeta';
 import Section from './ui/Section';
 import PageHeader from './ui/PageHeader';
 
@@ -37,6 +41,10 @@ export {
     NowPlaying,
     About,
     Connect,
+    GitHubStats,
+    GitHubProjects,
+    GitHubCalendar,
+    RepoMeta,
     Section,
     PageHeader
 };
