@@ -22,6 +22,7 @@ import Section from './ui/Section';
 import PageHeader from './ui/PageHeader';
 import KeyboardShortcutsModal from './ui/KeyboardShortcutsModal';
 import MatrixOverlay from './ui/MatrixOverlay';
+import Typewriter from './Typewriter/Typewriter';
 
 
 
@@ -50,5 +51,6 @@ export {
     Section,
     PageHeader,
     KeyboardShortcutsModal,
-    MatrixOverlay
+    MatrixOverlay,
+    Typewriter
 };

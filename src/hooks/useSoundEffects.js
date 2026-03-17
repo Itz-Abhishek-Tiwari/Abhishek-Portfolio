@@ -9,18 +9,20 @@ export default function useSoundEffects() {
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
 
-            oscillator.type = "square"; // Retro 8-bit feel
-            oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.1);
+            oscillator.type = "square";
+            // Retro "Coin" sound: Quick jump from B5 to E6
+            const now = audioCtx.currentTime;
+            oscillator.frequency.setValueAtTime(987.77, now);
+            oscillator.frequency.setValueAtTime(1318.51, now + 0.05);
 
-            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0.05, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
 
             oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
 
             oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.1);
+            oscillator.stop(now + 0.15);
         } catch (e) {
             console.warn("Audio blocked", e);
         }
@@ -33,17 +35,18 @@ export default function useSoundEffects() {
             const gainNode = audioCtx.createGain();
 
             oscillator.type = "square";
-            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.05);
+            // Retro "Blip"
+            const now = audioCtx.currentTime;
+            oscillator.frequency.setValueAtTime(1500, now);
 
-            gainNode.gain.setValueAtTime(0.03, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+            gainNode.gain.setValueAtTime(0.02, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
 
             oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
 
             oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.05);
+            oscillator.stop(now + 0.05);
         } catch {
             // Silent fail
         }
@@ -56,17 +59,19 @@ export default function useSoundEffects() {
             const gainNode = audioCtx.createGain();
 
             oscillator.type = "square";
-            oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.03);
+            // Retro "Mechanical Click"
+            const now = audioCtx.currentTime;
+            oscillator.frequency.setValueAtTime(400, now);
+            oscillator.frequency.exponentialRampToValueAtTime(100, now + 0.02);
 
-            gainNode.gain.setValueAtTime(0.04, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+            gainNode.gain.setValueAtTime(0.03, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.02);
 
             oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
 
             oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.03);
+            oscillator.stop(now + 0.02);
         } catch {
             // Silent fail
         }

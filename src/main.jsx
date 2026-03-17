@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Home, ProjectsPage, ArticlesPage, Contact, Error } from './pages'
+import { Home, ProjectsPage, ArticlesPage, LinksPage, Contact, Error } from './pages'
 import { ProjectIndividual, ArticleIndividual, Layout } from './components'
 import './styles/global.css'
 
@@ -27,6 +27,10 @@ const router = createBrowserRouter(
         {
           path: 'contact',
           element: <Contact />
+        },
+        {
+          path: 'links',
+          element: <LinksPage />
         },
         {
           path: 'projects/:projectid',

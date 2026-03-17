@@ -180,10 +180,10 @@ export default function NowPlaying() {
                                     <Youtube className="w-2.5 h-2.5 md:w-3 md:h-3 text-vibrant-red" />
                                 </div>
                                 <h4 className="text-[10px] md:text-[11px] font-mono font-black text-foreground truncate max-w-[100px] md:max-w-[130px]">
-                                    Tum Se Hi
+                                    Cloud 9
                                 </h4>
                                 <p className="text-[8px] md:text-[9px] font-mono text-muted-foreground truncate max-w-[100px] md:max-w-[130px]">
-                                    Mohit Chauhan
+                                    Tobu & Itro
                                 </p>
                             </div>
 

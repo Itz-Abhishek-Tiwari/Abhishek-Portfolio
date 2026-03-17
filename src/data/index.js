@@ -3,6 +3,7 @@ import work from './work';
 import education from './education';
 import skills_list from './skills';
 import articles from './articles';
+import links from './links';
 
 const portfolioData = {
   projects,
@@ -11,6 +12,7 @@ const portfolioData = {
   review: [],
   skills_list,
   articles,
+  links,
 };
 
 export default portfolioData;
