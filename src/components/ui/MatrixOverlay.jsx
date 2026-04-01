@@ -47,7 +47,7 @@ export default function MatrixOverlay({ isVisible, duration = 4000, onDone }) {
         const drops = new Array(columns).fill(0).map(() => Math.random() * -100);
 
         const interval = setInterval(() => {
-            ctx.fillStyle = "rgba(29, 32, 33, 0.1)";
+            ctx.fillStyle = "rgba(30, 30, 46, 0.1)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.font = `bold ${fontSize}px "Geist Mono", monospace`;
@@ -59,11 +59,11 @@ export default function MatrixOverlay({ isVisible, duration = 4000, onDone }) {
 
                 // Dynamic coloring for depth
                 if (Math.random() > 0.98) {
-                    ctx.fillStyle = "#ebdbb2"; // Rare white character
+                    ctx.fillStyle = "#cdd6f4"; // Rare white character (Catppuccin Text)
                 } else if (drops[i] < 5) {
-                    ctx.fillStyle = "#fabd2f"; // Yellow head
+                    ctx.fillStyle = "#f9e2af"; // Yellow head (Catppuccin Yellow)
                 } else {
-                    ctx.fillStyle = "#8ec07c"; // Standard green
+                    ctx.fillStyle = "#a6e3a1"; // Standard green (Catppuccin Green)
                 }
 
                 ctx.fillText(char, x, y);
@@ -85,7 +85,7 @@ export default function MatrixOverlay({ isVisible, duration = 4000, onDone }) {
 
     return (
         <div className="matrix-overlay">
-            <div className="absolute inset-0 z-20 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(29,32,33,0.8)_100%)]" />
+            <div className="absolute inset-0 z-20 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(30,30,46,0.8)_100%)]" />
             <canvas ref={canvasRef} className="absolute inset-0" />
             <div className="relative z-30 flex flex-col items-center gap-3 text-center pointer-events-none select-none">
                 <p className="font-mono text-xs font-black uppercase tracking-[0.5em] text-vibrant-yellow animate-pulse">

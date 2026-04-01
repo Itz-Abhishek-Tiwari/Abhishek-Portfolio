@@ -9,7 +9,7 @@ export default function NowPlaying() {
     const audioRef = useRef(null);
     const trackName = "Soft Lo-Fi Beat | GIRL";
     const artistName = "Alex-Productions";
-    const audioUrl = "https://www.chosic.com/wp-content/uploads/2021/06/Soft-Lo-Fi-Beat-GIRL.mp3";
+    const audioUrl = "https://www.chosic.com/wp-content/uploads/2020/07/alexander-nakarada-superepic(chosic.com).mp3";
     const sourceUrl = "https://www.chosic.com/free-music/all/?category=lofi-background-music";
 
     // Detect screen width to set initial state
