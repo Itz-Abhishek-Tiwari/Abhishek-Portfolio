@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Youtube, ExternalLink, ChevronRight, ChevronLeft, Volume2, VolumeX } from "lucide-react";
+import { Music, ExternalLink, ChevronRight, ChevronLeft, Volume2, VolumeX } from "lucide-react";
 
 export default function NowPlaying() {
     const [isCollapsed, setIsCollapsed] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
-    const playerRef = useRef(null);
-    const songId = "86zCa3gGkEQ";
-    const songUrl = `https://www.youtube.com/watch?v=${songId}&list=RD${songId}&start_radio=1`;
+    const audioRef = useRef(null);
+    const trackName = "Soft Lo-Fi Beat | GIRL";
+    const artistName = "Alex-Productions";
+    const audioUrl = "https://www.chosic.com/wp-content/uploads/2021/06/Soft-Lo-Fi-Beat-GIRL.mp3";
+    const sourceUrl = "https://www.chosic.com/free-music/all/?category=lofi-background-music";
 
     // Detect screen width to set initial state
     useEffect(() => {
@@ -17,55 +19,25 @@ export default function NowPlaying() {
         }
     }, []);
 
-    // Load YouTube IFrame API
+    // Handle initialization and playback
     useEffect(() => {
-        // Only load if not already loaded
-        if (!window.YT) {
-            const tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        if (audioRef.current) {
+            audioRef.current.volume = 0.4;
+            audioRef.current.loop = true;
         }
 
-        window.onYouTubeIframeAPIReady = () => {
-            playerRef.current = new window.YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: songId,
-                playerVars: {
-                    autoplay: 1,
-                    mute: 1,
-                    loop: 1,
-                    playlist: songId,
-                    controls: 0,
-                    showinfo: 0,
-                    modestbranding: 1
-                },
-                events: {
-                    onReady: (event) => {
-                        event.target.playVideo();
-                        setIsPlaying(true);
-                    },
-                    onStateChange: (event) => {
-                        // Handle loop manually if needed or other states
-                        if (event.data === window.YT.PlayerState.PLAYING) {
-                            setIsPlaying(true);
-                        } else if (event.data === window.YT.PlayerState.ENDED) {
-                            event.target.playVideo();
-                        }
-                    }
-                }
-            });
+        const handleCanPlay = () => {
+            setIsPlaying(true);
         };
 
-        // If API already loaded (on re-mount)
-        if (window.YT && window.YT.Player) {
-            window.onYouTubeIframeAPIReady();
+        const audio = audioRef.current;
+        if (audio) {
+            audio.addEventListener('canplay', handleCanPlay);
         }
 
         return () => {
-            if (playerRef.current) {
-                playerRef.current.destroy();
+            if (audio) {
+                audio.removeEventListener('canplay', handleCanPlay);
             }
         };
     }, []);
@@ -73,30 +45,31 @@ export default function NowPlaying() {
     const toggleMute = (e) => {
         e.stopPropagation();
         hasInteractedRef.current = true; // Mark as interacted to stop auto-unmute
-        if (playerRef.current) {
-            if (isMuted) {
-                playerRef.current.unMute();
-                setIsMuted(false);
-            } else {
-                playerRef.current.mute();
-                setIsMuted(true);
+        if (audioRef.current) {
+            const newMuteState = !isMuted;
+            audioRef.current.muted = newMuteState;
+            setIsMuted(newMuteState);
+
+            if (!newMuteState) {
+                audioRef.current.play().catch(e => console.warn("Audio playback blocked", e));
             }
         }
     };
 
     const hasInteractedRef = useRef(false);
 
-    // Auto-unmute on first interaction
+    // Auto-play/unmute on first interaction
     useEffect(() => {
         if (hasInteractedRef.current) return;
 
         const handleFirstInteraction = () => {
-            if (playerRef.current && !hasInteractedRef.current) {
+            if (audioRef.current && !hasInteractedRef.current) {
                 hasInteractedRef.current = true;
-                if (isMuted) {
-                    playerRef.current.unMute();
-                    setIsMuted(false);
-                }
+                audioRef.current.muted = false;
+                setIsMuted(false);
+                audioRef.current.play().then(() => {
+                    setIsPlaying(true);
+                }).catch(e => console.warn("Audio playback blocked after interaction", e));
                 cleanup();
             }
         };
@@ -124,7 +97,12 @@ export default function NowPlaying() {
             animate={{ opacity: 1, x: 0 }}
             className="fixed bottom-6 left-6 z-40 flex items-center bg-secondary/90 backdrop-blur-md border border-border shadow-2xl overflow-hidden h-14 md:h-16 max-w-[calc(100vw-48px)] md:max-w-md"
         >
-            <div id="youtube-player" style={{ position: 'absolute', visibility: 'hidden' }}></div>
+            <audio
+                ref={audioRef}
+                src={audioUrl}
+                preload="auto"
+                muted={isMuted}
+            />
 
             <div className="flex items-center p-2 pr-4 h-full">
                 {/* Toggle Button for Mobile/Desktop */}
@@ -177,23 +155,23 @@ export default function NowPlaying() {
                                     <span className="text-[8px] md:text-[9px] font-mono font-bold uppercase tracking-wider text-primary/70">
                                         Now listening
                                     </span>
-                                    <Youtube className="w-2.5 h-2.5 md:w-3 md:h-3 text-vibrant-red" />
+                                    <Music className="w-2.5 h-2.5 md:w-3 md:h-3 text-vibrant-emerald" />
                                 </div>
-                                <h4 className="text-[10px] md:text-[11px] font-mono font-black text-foreground truncate max-w-[100px] md:max-w-[130px]">
-                                    Cloud 9
+                                <h4 className="text-[10px] md:text-[11px] font-mono font-black text-foreground truncate max-w-[100px] md:max-w-[130px]" title={trackName}>
+                                    {trackName}
                                 </h4>
                                 <p className="text-[8px] md:text-[9px] font-mono text-muted-foreground truncate max-w-[100px] md:max-w-[130px]">
-                                    Tobu & Itro
+                                    {artistName}
                                 </p>
                             </div>
 
-                            {/* External Link */}
+                            {/* Source Link */}
                             <a
-                                href={songUrl}
+                                href={sourceUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="ml-4 p-2 hover:bg-primary/10 rounded-none transition-colors border-l border-border/50"
-                                title="Open on YouTube"
+                                title="View on Chosic"
                             >
                                 <ExternalLink className="w-3 h-3 text-muted-foreground hover:text-primary transition-colors" />
                             </a>

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 
-const Section = ({ title, id, children, accentColor = "bg-vibrant-yellow", subtitle }) => (
+const Section = ({ title, id, children, accentColor = "bg-vibrant-yellow", subtitle, rightElement }) => (
     <section id={id} className="relative py-20 px-6 max-w-6xl mx-auto">
         <div className="flex flex-col gap-10">
             <motion.div
@@ -11,11 +11,18 @@ const Section = ({ title, id, children, accentColor = "bg-vibrant-yellow", subti
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="flex flex-col gap-3"
             >
-                <div className="flex items-center gap-4">
-                    <span className={`h-px w-12 ${accentColor}`}></span>
-                    <h2 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-foreground">
-                        {title}
-                    </h2>
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                        <span className={`h-px w-12 ${accentColor}`}></span>
+                        <h2 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-foreground">
+                            {title}
+                        </h2>
+                    </div>
+                    {rightElement && (
+                        <div className="flex-shrink-0">
+                            {rightElement}
+                        </div>
+                    )}
                 </div>
                 {subtitle && (
                     <p className="text-sm font-mono text-muted-foreground max-w-2xl leading-relaxed pl-16">
@@ -34,6 +41,7 @@ Section.propTypes = {
     children: PropTypes.node.isRequired,
     accentColor: PropTypes.string,
     subtitle: PropTypes.string,
+    rightElement: PropTypes.node,
 };
 
 export default Section;

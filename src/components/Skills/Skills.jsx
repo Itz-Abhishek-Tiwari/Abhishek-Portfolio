@@ -1,8 +1,10 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Code2, Terminal, Layers } from "lucide-react";
 import portfolioData from "../../data";
 import Section from "../ui/Section";
 import PropTypes from 'prop-types';
+import BugBattle from "./BugBattle";
 
 const SkillCard = ({ title, skills, icon: Icon, accentColor }) => (
   <motion.div
@@ -51,6 +53,7 @@ SkillCard.propTypes = {
 
 export default function Skills() {
   const { languages = [], frameworks = [], miscellaneous = [] } = portfolioData.skills_list || {};
+  const [isBattling, setIsBattling] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -64,33 +67,69 @@ export default function Skills() {
   };
 
   return (
-    <Section title="Technical Arsenal" id="skills" accentColor="bg-vibrant-purple">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border"
-      >
-        <SkillCard
-          title="Languages"
-          skills={languages}
-          icon={Code2}
-          accentColor="var(--vibrant-blue)"
-        />
-        <SkillCard
-          title="Frameworks"
-          skills={frameworks}
-          icon={Layers}
-          accentColor="var(--vibrant-purple)"
-        />
-        <SkillCard
-          title="Tools & Ecosystem"
-          skills={miscellaneous}
-          icon={Terminal}
-          accentColor="var(--vibrant-emerald)"
-        />
-      </motion.div>
+    <Section
+      title="Technical Arsenal"
+      id="skills"
+      accentColor="bg-vibrant-purple"
+      rightElement={
+        <button
+          onClick={() => setIsBattling(!isBattling)}
+          className={`flex items-center gap-2 px-3 py-1 border text-[10px] font-mono font-bold uppercase tracking-widest transition-all ${isBattling
+            ? "bg-vibrant-red/10 border-vibrant-red text-vibrant-red hover:bg-vibrant-red hover:text-white"
+            : "bg-vibrant-emerald/10 border-vibrant-emerald text-vibrant-emerald hover:bg-vibrant-emerald hover:text-white"
+            }`}
+        >
+          <Terminal className="h-3 w-3" />
+          {isBattling ? "Exit Debug" : "Enter Debug Mode"}
+        </button>
+      }
+    >
+      <AnimatePresence mode="wait">
+        {isBattling ? (
+          <motion.div
+            key="battle"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            className="border border-border bg-border/20 backdrop-blur-sm"
+          >
+            <BugBattle
+              skills={{ languages, frameworks, miscellaneous }}
+              onExit={() => setIsBattling(false)}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="grid"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border"
+          >
+            <SkillCard
+              title="Languages"
+              skills={languages}
+              icon={Code2}
+              accentColor="var(--vibrant-blue)"
+            />
+            <SkillCard
+              title="Frameworks"
+              skills={frameworks}
+              icon={Layers}
+              accentColor="var(--vibrant-purple)"
+            />
+            <SkillCard
+              title="Tools & Ecosystem"
+              skills={miscellaneous}
+              icon={Terminal}
+              accentColor="var(--vibrant-emerald)"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Section>
   );
 }
