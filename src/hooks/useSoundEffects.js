@@ -1,11 +1,27 @@
+import { useRef } from 'react';
+
 /**
  * Custom hook to generate and play mechanical UI sound effects using Web Audio API.
- * No external assets required.
+ * Creates a single AudioContext via ref (reused across all calls) to avoid the
+ * browser limit of ~6 AudioContext instances.
  */
 export default function useSoundEffects() {
+    const audioCtxRef = useRef(null);
+
+    const getCtx = () => {
+        if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
+            audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        // Resume if suspended (browser autoplay policy)
+        if (audioCtxRef.current.state === 'suspended') {
+            audioCtxRef.current.resume();
+        }
+        return audioCtxRef.current;
+    };
+
     const playClick = () => {
         try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const audioCtx = getCtx();
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
 
@@ -30,7 +46,7 @@ export default function useSoundEffects() {
 
     const playHover = () => {
         try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const audioCtx = getCtx();
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
 
@@ -54,7 +70,7 @@ export default function useSoundEffects() {
 
     const playTyping = () => {
         try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const audioCtx = getCtx();
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
 

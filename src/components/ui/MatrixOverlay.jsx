@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
-const COLS = 30;
 const CHARS = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789<>{}[]//\\*&^%$#@!ABHISHEKTIWARI";
 
 function randomChar() {

@@ -12,10 +12,6 @@ const SkillCard = ({ title, skills, icon: Icon, accentColor }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
-    variants={{
-      hidden: { opacity: 0, y: 10 },
-      visible: { opacity: 1, y: 0 }
-    }}
     className="vercel-card flex flex-col gap-6 p-6 h-full"
     style={{ borderTop: `2px solid ${accentColor}` }}
   >

@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Mail, Instagram, Globe, Youtube, MessageCircle } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Instagram, Globe } from 'lucide-react';
 
 const links = [
     {

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Hero, SocialLinks, Skills, Projects, WorkExperience, Education, About, Connect, GitHubStats, GitHubProjects, GitHubCalendar } from '../../components'
+import { Hero, SocialLinks, Skills, Projects, WorkExperience, Education, About, Connect, GitHubStats, GitHubProjects } from '../../components'
 import portfolioData from "../../data"
 import useSEO from "../../hooks/useSEO"
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { fetchGitHubRepos } from '../../lib/github';
 import { ExternalLink, Star, GitFork, Book } from 'lucide-react';
+import PropTypes from 'prop-types';
 import Section from '../ui/Section';
 
 const LANGUAGE_COLORS = {
@@ -65,6 +66,18 @@ const RepoCard = ({ repo, index }) => (
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-700 pointer-events-none" />
     </motion.a>
 );
+
+RepoCard.propTypes = {
+    repo: PropTypes.shape({
+        html_url: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        language: PropTypes.string,
+        stargazers_count: PropTypes.number,
+        forks_count: PropTypes.number,
+    }).isRequired,
+    index: PropTypes.number.isRequired,
+};
 
 const GitHubProjects = () => {
     const [repos, setRepos] = useState([]);

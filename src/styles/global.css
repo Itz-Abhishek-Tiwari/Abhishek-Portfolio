@@ -9,10 +9,10 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ─── Selection color (Gruvbox yellow) ───────────────────────────────────── */
+/* ─── Selection color (Vibrant Gruvbox Gold) ───────────────────────────────────── */
 ::selection {
-  background-color: rgba(250, 189, 47, 0.25);
-  color: #ebdbb2;
+  background-color: rgba(250, 189, 47, 0.3);
+  color: #fabd2f;
 }
 
 @custom-variant dark (&:where(.gruvbox, .gruvbox *));
@@ -22,31 +22,31 @@ html {
   --font-sans: "Geist Sans", "Inter", system-ui, sans-serif;
   --font-mono: "Geist Mono", "JetBrains Mono", monospace;
 
-  /* Catppuccin Mocha Core Palette */
-  --color-zinc-50: #cdd6f4;
-  --color-zinc-100: #bac2de;
-  --color-zinc-200: #a6adc8;
-  --color-zinc-300: #9399b2;
-  --color-zinc-400: #7f849c;
-  --color-zinc-500: #6c7086;
-  --color-zinc-600: #585b70;
-  --color-zinc-700: #45475a;
-  --color-zinc-800: #313244;
-  --color-zinc-900: #1e1e2e;
-  --color-zinc-950: #11111b;
+  /* Vibrant Gruvbox Core Palette */
+  --color-zinc-50: #fbf1c7;
+  --color-zinc-100: #ebdbb2;
+  --color-zinc-200: #d5c4a1;
+  --color-zinc-300: #bdae93;
+  --color-zinc-400: #a89984;
+  --color-zinc-500: #928374;
+  --color-zinc-600: #7c6f64;
+  --color-zinc-700: #665c54;
+  --color-zinc-800: #504945;
+  --color-zinc-900: #3c3836;
+  --color-zinc-950: #282828;
 
-  /* Catppuccin Accent Colors */
-  --color-telephone-red: #f38ba8;
-  --color-accent-red: #eba0ac;
+  /* Gruvbox Accent Colors */
+  --color-telephone-red: #fb4934;
+  --color-accent-red: #cc241d;
 
-  /* Catppuccin Vibrant Palette */
-  --color-vibrant-blue: #89b4fa;
-  --color-vibrant-purple: #cba6f7;
-  --color-vibrant-emerald: #a6e3a1;
-  --color-vibrant-pink: #f5c2e7;
-  --color-vibrant-cyan: #89dceb;
-  --color-vibrant-orange: #fab387;
-  --color-vibrant-yellow: #f9e2af;
+  /* Gruvbox Vibrant Palette */
+  --color-vibrant-blue: #83a598;
+  --color-vibrant-purple: #d3869b;
+  --color-vibrant-emerald: #b8bb26;
+  --color-vibrant-pink: #d3869b;
+  --color-vibrant-cyan: #8ec07c;
+  --color-vibrant-orange: #fe8019;
+  --color-vibrant-yellow: #fabd2f;
 
   /* shadcn mappings for Tailwind v4 */
   --color-background: var(--background);
@@ -75,102 +75,87 @@ html {
   --radius-sm: 0px;
 
   @keyframes vibrant-float {
-
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-
-    33% {
-      transform: translate(10%, -10%) scale(1.1);
-    }
-
-    66% {
-      transform: translate(-5%, 5%) scale(0.9);
-    }
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(15px, -15px) scale(1.05); }
+    66% { transform: translate(-10px, 10px) scale(0.95); }
   }
 
   @keyframes beam-move {
-    0% {
-      transform: translateX(-100%);
-    }
-
-    100% {
-      transform: translateX(100%);
-    }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 }
 
 @layer base {
 
-  /* Catppuccin Mocha is the default theme */
+  /* Vibrant Gruvbox Dark is the default theme */
   :root {
-    --background: #1e1e2e;
-    --foreground: #cdd6f4;
-    --card: #181825;
-    --card-foreground: #cdd6f4;
-    --popover: #181825;
-    --popover-foreground: #cdd6f4;
-    --primary: #cba6f7;
-    --primary-foreground: #11111b;
-    --secondary: #313244;
-    --secondary-foreground: #cdd6f4;
-    --muted: #313244;
-    --muted-foreground: #7f849c;
-    --accent: #89b4fa;
-    --accent-foreground: #11111b;
-    --destructive: #f38ba8;
-    --destructive-foreground: #cdd6f4;
-    --border: #313244;
-    --input: #313244;
-    --ring: #cba6f7;
+    --background: #141617; /* Deepest Gruvbox Dark */
+    --foreground: #ebdbb2;
+    --card: #1c1f20;
+    --card-foreground: #ebdbb2;
+    --popover: #1c1f20;
+    --popover-foreground: #ebdbb2;
+    --primary: #fabd2f; /* Gold */
+    --primary-foreground: #1d2021;
+    --secondary: #3c3836;
+    --secondary-foreground: #ebdbb2;
+    --muted: #3c3836;
+    --muted-foreground: #928374;
+    --accent: #8ec07c; /* Aqua */
+    --accent-foreground: #1d2021;
+    --destructive: #fb4934;
+    --destructive-foreground: #ebdbb2;
+    --border: rgba(235, 219, 178, 0.1);
+    --input: #3c3836;
+    --ring: rgba(250, 189, 47, 0.5);
     --radius: 0px;
 
-    /* Catppuccin Vibrant Overrides */
-    --vibrant-blue: #89b4fa;
-    --vibrant-purple: #cba6f7;
-    --vibrant-emerald: #a6e3a1;
-    --vibrant-orange: #fab387;
-    --vibrant-pink: #f5c2e7;
-    --vibrant-cyan: #89dceb;
-    --vibrant-yellow: #f9e2af;
+    /* Gruvbox Vibrant Overrides */
+    --vibrant-blue: #83a598;
+    --vibrant-purple: #d3869b;
+    --vibrant-emerald: #b8bb26;
+    --vibrant-orange: #fe8019;
+    --vibrant-pink: #d3869b;
+    --vibrant-cyan: #8ec07c;
+    --vibrant-yellow: #fabd2f;
 
-    --telephone-red: #f38ba8;
-    --accent-red: #eba0ac;
+    --telephone-red: #fb4934;
+    --accent-red: #cc241d;
   }
 
   [data-theme='light'] {
-    --background: #eff1f5;
-    --foreground: #4c4f69;
-    --card: #e6e9ef;
-    --card-foreground: #4c4f69;
-    --popover: #e6e9ef;
-    --popover-foreground: #4c4f69;
-    --primary: #8839ef;
-    --primary-foreground: #eff1f5;
-    --secondary: #ccd0da;
-    --secondary-foreground: #4c4f69;
-    --muted: #ccd0da;
-    --muted-foreground: #8c8fa1;
-    --accent: #1e66f5;
-    --accent-foreground: #eff1f5;
-    --destructive: #d20f39;
-    --destructive-foreground: #eff1f5;
-    --border: #ccd0da;
-    --input: #ccd0da;
-    --ring: #8839ef;
+    --background: #fbf1c7; /* Gruvbox Light Soft */
+    --foreground: #282828; /* Hard Dark for text */
+    --card: #f2e5bc;
+    --card-foreground: #282828;
+    --popover: #f2e5bc;
+    --popover-foreground: #282828;
+    --primary: #9d0006; /* Striking Red-Orange for light mode primary */
+    --primary-foreground: #fbf1c7;
+    --secondary: #d5c4a1;
+    --secondary-foreground: #3c3836;
+    --muted: #d5c4a1;
+    --muted-foreground: #504945; /* Darker for better contrast */
+    --accent: #427b58; /* Balanced Green */
+    --accent-foreground: #fbf1c7;
+    --destructive: #cc241d;
+    --destructive-foreground: #fbf1c7;
+    --border: rgba(60, 56, 54, 0.15); /* Slightly darker border */
+    --input: #d5c4a1;
+    --ring: rgba(157, 0, 6, 0.5);
 
-    /* Latte Mode Vibrant Adjustments */
-    --vibrant-blue: #1e66f5;
-    --vibrant-purple: #8839ef;
-    --vibrant-emerald: #40a02b;
-    --vibrant-orange: #fe640b;
-    --vibrant-pink: #ea76cb;
-    --vibrant-cyan: #04a5e5;
-    --vibrant-yellow: #df8e1d;
+    /* Light Mode Vibrant Adjustments — More saturated for visibility */
+    --vibrant-blue: #076678;
+    --vibrant-purple: #8f3f71;
+    --vibrant-emerald: #427b58;
+    --vibrant-orange: #af3a03;
+    --vibrant-pink: #b16286;
+    --vibrant-cyan: #076678;
+    --vibrant-yellow: #b57614;
 
-    --telephone-red: #d20f39;
-    --accent-red: #e64553;
+    --telephone-red: #9d0006;
+    --accent-red: #cc241d;
   }
 
   * {
@@ -239,7 +224,7 @@ html {
     pointer-events: none;
   }
 
-  /* Gruvbox Premium Typography for prose */
+  /* Vibrant Gruvbox Premium Typography for prose */
   .prose {
     --tw-prose-body: var(--foreground);
     --tw-prose-headings: var(--foreground);
@@ -252,10 +237,10 @@ html {
     --tw-prose-quote-borders: var(--accent);
     --tw-prose-captions: var(--muted-foreground);
     --tw-prose-code: var(--primary);
-    --tw-prose-pre-code: var(--foreground);
+    --tw-prose-pre-code: var(--zinc-100);
     --tw-prose-pre-bg: var(--card);
-    --tw-prose-th-borders: #504945;
-    --tw-prose-td-borders: #3c3836;
+    --tw-prose-th-borders: var(--secondary);
+    --tw-prose-td-borders: var(--border);
   }
 
   .prose h1,
@@ -266,7 +251,7 @@ html {
   }
 
   .prose a {
-    @apply no-underline border-b border-transparent transition-colors hover:border-vibrant-yellow;
+    @apply no-underline border-b border-transparent transition-all hover:border-vibrant-yellow hover:text-vibrant-yellow;
   }
 
   .prose strong {
@@ -274,19 +259,19 @@ html {
   }
 
   .prose blockquote {
-    @apply border-l-4 border-vibrant-orange italic bg-secondary/50 py-4 px-8 shadow-sm my-10;
+    @apply border-l-4 border-vibrant-orange italic bg-zinc-900/30 py-4 px-8 shadow-sm my-10;
   }
 
   .prose pre {
-    @apply border border-border bg-card p-6 shadow-lg my-10;
+    @apply border border-border bg-card/80 backdrop-blur-sm p-6 shadow-2xl my-10;
   }
 
   .prose code {
-    @apply bg-secondary px-1.5 py-0.5 text-sm font-medium text-vibrant-yellow before:content-none after:content-none;
+    @apply bg-secondary/50 px-1.5 py-0.5 text-sm font-medium text-vibrant-yellow before:content-none after:content-none;
   }
 
   .prose pre code {
-    @apply bg-transparent p-0 text-zinc-200 font-light text-base leading-relaxed;
+    @apply bg-transparent p-0 text-zinc-100 font-light text-base leading-relaxed;
   }
 
   .prose ul>li::before {
@@ -299,46 +284,51 @@ html {
 
   /* Card Styles */
   .vercel-card {
-    @apply border border-border bg-card transition-all duration-200;
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+    @apply border border-border bg-card/50 backdrop-blur-md transition-all duration-300;
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.3);
   }
 
   .vercel-card:hover {
-    @apply border-primary/50;
-    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.2);
+    @apply border-primary/40 transform -translate-y-1;
+    box-shadow: 0 12px 30px -10px rgba(250, 189, 47, 0.15);
   }
 
   /* Button Styles — sharp corners enforced */
   .vercel-button-primary {
-    @apply relative overflow-hidden inline-flex items-center justify-center bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-all focus:outline-none uppercase tracking-widest;
+    @apply relative overflow-hidden inline-flex items-center justify-center bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground transition-all focus:outline-none uppercase tracking-widest;
     border-radius: 0 !important;
   }
 
   .vercel-button-primary::before {
     content: '';
-    @apply absolute inset-0 bg-white/20 -translate-x-full skew-x-[-25deg] transition-transform duration-500;
+    @apply absolute inset-0 bg-white/30 -translate-x-full skew-x-[-25deg] transition-transform duration-700;
   }
 
   .vercel-button-primary:hover::before {
-    @apply translate-x-[200%];
+    @apply translate-x-[250%];
   }
 
   .vercel-button-primary:hover {
-    @apply opacity-90 shadow-[0_0_20px_rgba(250,189,47,0.3)];
+    @apply opacity-100 shadow-[0_0_25px_rgba(250,189,47,0.4)] scale-[1.02];
   }
 
   .vercel-button-secondary {
-    @apply inline-flex items-center justify-center border border-border bg-secondary px-6 py-3 text-sm font-bold text-secondary-foreground transition-all hover:bg-muted focus:outline-none uppercase tracking-widest;
+    @apply inline-flex items-center justify-center border border-border bg-secondary/20 backdrop-blur-sm px-6 py-2.5 text-xs font-bold text-secondary-foreground transition-all hover:bg-secondary/40 focus:outline-none uppercase tracking-widest;
     border-radius: 0 !important;
   }
 
   .vercel-button-secondary:hover {
-    @apply border-primary/30;
+    @apply border-primary/50 text-primary;
   }
 
   /* Glassmorphism variant */
   .glass-card {
-    @apply bg-card/50 backdrop-blur-md border border-border shadow-2xl;
+    @apply bg-card/40 backdrop-blur-xl border border-border/50 shadow-2xl transition-all duration-500 relative overflow-hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none;
   }
 
   /* Background Effects */
@@ -443,25 +433,7 @@ html {
   background: #fabd2f;
 }
 
-@keyframes vibrant-float {
 
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(10%, -10%) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-5%, 5%) scale(0.9);
-  }
-}
-
-.animate-vibrant-float {
-  animation: vibrant-float 20s ease-in-out infinite;
-}
 
 .color-beam {
   @apply absolute h-[1px] w-full opacity-15;
@@ -470,15 +442,7 @@ html {
   will-change: transform;
 }
 
-@keyframes beam-move {
-  0% {
-    transform: translateX(-100%);
-  }
 
-  100% {
-    transform: translateX(100%);
-  }
-}
 
 /* Gruvbox scanline subtle effect */
 .gruvbox-scanlines {

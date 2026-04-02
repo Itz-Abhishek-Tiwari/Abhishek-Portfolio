@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 /**
  * useEasterEggs — registers global keyboard hooks for easter eggs.

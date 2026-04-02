@@ -38,7 +38,7 @@ export const fetchGitHubRepos = async () => {
     }
 };
 
-export const getGitHubRepos = fetchGitHubRepos;
+
 
 export const getRepoStats = async (url) => {
     try {

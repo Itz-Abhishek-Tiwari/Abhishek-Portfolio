@@ -7,10 +7,13 @@ export default function NowPlaying() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
     const audioRef = useRef(null);
-    const trackName = "Soft Lo-Fi Beat | GIRL";
-    const artistName = "Alex-Productions";
-    const audioUrl = "https://www.chosic.com/wp-content/uploads/2020/07/alexander-nakarada-superepic(chosic.com).mp3";
-    const sourceUrl = "https://www.chosic.com/free-music/all/?category=lofi-background-music";
+    // Declare ref before it is referenced anywhere else
+    const hasInteractedRef = useRef(false);
+
+    const trackName = "Embrace";
+    const artistName = "Roa";
+    const audioUrl = "https://www.chosic.com/wp-content/uploads/2021/04/Roa-Embrace-chosic.com_.mp3";
+    const sourceUrl = "https://www.chosic.com/free-music/all/";
 
     // Detect screen width to set initial state
     useEffect(() => {
@@ -19,7 +22,7 @@ export default function NowPlaying() {
         }
     }, []);
 
-    // Handle initialization and playback
+    // Handle audio initialization
     useEffect(() => {
         if (audioRef.current) {
             audioRef.current.volume = 0.4;
@@ -42,26 +45,9 @@ export default function NowPlaying() {
         };
     }, []);
 
-    const toggleMute = (e) => {
-        e.stopPropagation();
-        hasInteractedRef.current = true; // Mark as interacted to stop auto-unmute
-        if (audioRef.current) {
-            const newMuteState = !isMuted;
-            audioRef.current.muted = newMuteState;
-            setIsMuted(newMuteState);
-
-            if (!newMuteState) {
-                audioRef.current.play().catch(e => console.warn("Audio playback blocked", e));
-            }
-        }
-    };
-
-    const hasInteractedRef = useRef(false);
-
-    // Auto-play/unmute on first interaction
+    // Auto-play/unmute on first interaction — dependency array is [] because
+    // hasInteractedRef is a stable ref (no re-registration on each mute toggle).
     useEffect(() => {
-        if (hasInteractedRef.current) return;
-
         const handleFirstInteraction = () => {
             if (audioRef.current && !hasInteractedRef.current) {
                 hasInteractedRef.current = true;
@@ -89,7 +75,22 @@ export default function NowPlaying() {
         window.addEventListener('mousedown', handleFirstInteraction);
 
         return cleanup;
-    }, [isMuted]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const toggleMute = (e) => {
+        e.stopPropagation();
+        hasInteractedRef.current = true;
+        if (audioRef.current) {
+            const newMuteState = !isMuted;
+            audioRef.current.muted = newMuteState;
+            setIsMuted(newMuteState);
+
+            if (!newMuteState) {
+                audioRef.current.play().catch(e => console.warn("Audio playback blocked", e));
+            }
+        }
+    };
 
     return (
         <motion.div
@@ -105,10 +106,11 @@ export default function NowPlaying() {
             />
 
             <div className="flex items-center p-2 pr-4 h-full">
-                {/* Toggle Button for Mobile/Desktop */}
+                {/* Toggle Button */}
                 <button
                     onClick={() => setIsCollapsed(!isCollapsed)}
                     className="mr-2 p-1 hover:bg-primary/10 transition-colors text-muted-foreground hover:text-primary h-full border-r border-border/30 pr-3"
+                    aria-label={isCollapsed ? "Expand Now Playing" : "Collapse Now Playing"}
                     title={isCollapsed ? "Expand Now Playing" : "Collapse Now Playing"}
                 >
                     {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -118,6 +120,8 @@ export default function NowPlaying() {
                 <div
                     className="relative h-10 w-10 flex-shrink-0 cursor-pointer group/icon"
                     onClick={toggleMute}
+                    role="button"
+                    aria-label={isMuted ? "Unmute background music" : "Mute background music"}
                 >
                     <div className="absolute inset-0 bg-primary/10 rounded-full border border-primary/20 flex items-center justify-center transition-colors group-hover/icon:bg-primary/20">
                         {isMuted ? (
@@ -172,6 +176,7 @@ export default function NowPlaying() {
                                 rel="noopener noreferrer"
                                 className="ml-4 p-2 hover:bg-primary/10 rounded-none transition-colors border-l border-border/50"
                                 title="View on Chosic"
+                                aria-label="View track source on Chosic"
                             >
                                 <ExternalLink className="w-3 h-3 text-muted-foreground hover:text-primary transition-colors" />
                             </a>
@@ -182,4 +187,3 @@ export default function NowPlaying() {
         </motion.div>
     );
 }
-

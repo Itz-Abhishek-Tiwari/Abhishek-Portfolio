@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Github, Menu, X, ArrowRight, Terminal } from "lucide-react";
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
@@ -6,7 +6,7 @@ import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoGlitch, setLogoGlitch] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
+  const clickResetTimer = useRef(null);
   const location = useLocation();
 
   // Theme Toggle Logic
@@ -16,6 +16,7 @@ export default function Navbar() {
     }
     return 'dark';
   });
+  const [clickCount, setClickCount] = useState(0);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -58,16 +59,19 @@ export default function Navbar() {
 
   // Triple-click logo → glitch easter egg
   const handleLogoClick = useCallback(() => {
-    const newCount = clickCount + 1;
-    setClickCount(newCount);
-    if (newCount >= 3) {
-      setClickCount(0);
-      setLogoGlitch(true);
-      setTimeout(() => setLogoGlitch(false), 1500);
-    }
-    // Reset count if too slow
-    setTimeout(() => setClickCount(0), 600);
-  }, [clickCount]);
+    setClickCount(prev => {
+      const newCount = prev + 1;
+      if (newCount >= 3) {
+        setLogoGlitch(true);
+        setTimeout(() => setLogoGlitch(false), 1500);
+        return 0;
+      }
+      // Cancel any previous reset timer and start a new one
+      clearTimeout(clickResetTimer.current);
+      clickResetTimer.current = setTimeout(() => setClickCount(0), 600);
+      return newCount;
+    });
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl">
@@ -84,12 +88,12 @@ export default function Navbar() {
             to="/"
             className="group flex items-center gap-2.5"
             onClick={handleLogoClick}
-            title="abhishek_ (click 3x for a surprise)"
+            title={`abhishek_ (click ${3 - clickCount} more times for a surprise)`}
           >
             <div className="flex h-8 w-8 items-center justify-center bg-primary font-mono text-sm font-black text-primary-foreground transition-all group-hover:bg-accent">
               <Terminal className="h-4 w-4" />
             </div>
-            <span className={`font-mono text-base font-bold tracking-tight text-foreground transition-all ${logoGlitch ? "animate-glitch" : ""}`}>
+            <span className={`font-mono text-base font-medium tracking-[0.1em] text-foreground transition-all ${logoGlitch ? "animate-glitch" : ""}`}>
               abhishek<span className="text-primary">_</span>
             </span>
           </Link>
@@ -102,14 +106,14 @@ export default function Navbar() {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative text-sm font-medium transition-colors hover:text-foreground ${isActive ? "text-foreground" : "text-muted-foreground"
+                  className={`relative text-[12px] font-mono font-bold uppercase tracking-[0.2em] transition-all hover:text-primary ${isActive ? "text-primary" : "text-muted-foreground"
                     }`}
                 >
                   {link.label}
                   {isActive && (
                     <motion.div
                       layoutId="nav-underline"
-                      className="absolute -bottom-[1.2rem] left-0 right-0 h-[2px] bg-primary"
+                      className="absolute -bottom-[1.4rem] left-0 right-0 h-[3px] bg-primary shadow-[0_-4px_10px_rgba(250,189,47,0.4)]"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -186,13 +190,13 @@ export default function Navbar() {
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`flex items-center justify-between px-4 py-3 text-sm font-medium transition-all border-l-2 ${isActive
-                      ? "border-primary bg-secondary text-foreground"
-                      : "border-transparent text-muted-foreground hover:border-border hover:bg-secondary/50 hover:text-foreground"
+                    className={`flex items-center justify-between px-6 py-4 text-[13px] font-mono font-black uppercase tracking-[0.2em] transition-all border-l-4 ${isActive
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-transparent text-muted-foreground hover:border-primary/20 hover:bg-secondary/30 hover:text-foreground"
                       }`}
                   >
                     {link.label}
-                    <ArrowRight className={`h-4 w-4 transition-all ${isActive ? "text-primary" : "opacity-0 -translate-x-2"}`} />
+                    <ArrowRight className={`h-4 w-4 transition-all ${isActive ? "text-primary translate-x-0" : "opacity-0 -translate-x-4"}`} />
                   </Link>
                 );
               })}

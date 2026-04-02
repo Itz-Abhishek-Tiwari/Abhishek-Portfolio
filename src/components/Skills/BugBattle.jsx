@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bug, Shield, Zap, Heart, RefreshCcw, ScrollText } from "lucide-react";
+import { Bug, Shield, RefreshCcw, ScrollText } from "lucide-react";
+import PropTypes from 'prop-types';
 import useSoundEffects from "../../hooks/useSoundEffects";
 
 const BUGS = [
@@ -53,7 +54,7 @@ export default function BugBattle({ skills, onExit }) {
         }
     }, [playerHP, isGameOver]);
 
-    const useSkill = (skill, type) => {
+    const handleSkill = (skill, type) => {
         if (isGameOver || isAnimating) return;
         playClick();
 
@@ -203,7 +204,7 @@ export default function BugBattle({ skills, onExit }) {
                                 {list.slice(0, 3).map((skill) => (
                                     <button
                                         key={skill}
-                                        onClick={() => useSkill(skill, category)}
+                                        onClick={() => handleSkill(skill, category)}
                                         onMouseEnter={playHover}
                                         disabled={isAnimating}
                                         className="flex-1 border border-border bg-secondary/50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-all disabled:opacity-50"
@@ -228,3 +229,12 @@ export default function BugBattle({ skills, onExit }) {
         </div>
     );
 }
+
+BugBattle.propTypes = {
+    skills: PropTypes.shape({
+        languages: PropTypes.arrayOf(PropTypes.string),
+        frameworks: PropTypes.arrayOf(PropTypes.string),
+        miscellaneous: PropTypes.arrayOf(PropTypes.string),
+    }).isRequired,
+    onExit: PropTypes.func.isRequired,
+};

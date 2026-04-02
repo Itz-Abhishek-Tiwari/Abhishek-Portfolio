@@ -7,7 +7,8 @@ import portfolioData from '../../data';
 
 export default function ProjectIndividual() {
   const { projectid } = useParams();
-  const project = portfolioData.projects.find(p => p.id == projectid);
+  const projectId = Number(projectid);
+  const project = portfolioData.projects.find(p => p.id === projectId);
 
   if (!project) return <div className="p-20 text-center font-mono text-muted-foreground">Project not found</div>;
 
@@ -114,7 +115,7 @@ export default function ProjectIndividual() {
         </article>
 
         {/* Related Projects */}
-        {portfolioData.projects.filter(p => p.id != projectid).length > 0 && (
+        {portfolioData.projects.filter(p => p.id !== projectId).length > 0 && (
           <section className="mt-32 border-t border-border pt-16">
             <div className="flex items-center gap-3 mb-10">
               <span className="h-px w-12 bg-primary" />
@@ -122,7 +123,7 @@ export default function ProjectIndividual() {
             </div>
             <div className="grid grid-cols-1 gap-px sm:grid-cols-2 bg-border border border-border">
               {portfolioData.projects
-                .filter(p => p.id != projectid)
+                .filter(p => p.id !== projectId)
                 .slice(0, 2)
                 .map((related) => (
                   <Link

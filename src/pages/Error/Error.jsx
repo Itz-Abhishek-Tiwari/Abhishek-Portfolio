@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, RefreshCw, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
@@ -70,9 +70,9 @@ export default function Error() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [direction, gameStarted, gameOver]);
+  }, [direction, gameStarted, gameOver, resetGame]);
 
-  const generateFood = (currentSnake) => {
+  const generateFood = useCallback((currentSnake) => {
     let newFood;
     while (true) {
       newFood = {
@@ -85,16 +85,16 @@ export default function Error() {
       }
     }
     return newFood;
-  };
+  }, []);
 
-  const handleGameOver = () => {
+  const handleGameOver = useCallback(() => {
     setGameOver(true);
     setGameStarted(false);
     if (score > highScore) {
       setHighScore(score);
       localStorage.setItem('snakeHighScore', score.toString());
     }
-  };
+  }, [score, highScore]);
 
   // Game Loop
   useEffect(() => {
@@ -132,7 +132,7 @@ export default function Error() {
 
     const intervalId = setInterval(moveSnake, 100); // Game speed
     return () => clearInterval(intervalId);
-  }, [direction, food, gameStarted, gameOver, handleGameOver]);
+  }, [direction, food, gameStarted, gameOver, handleGameOver, generateFood]); // generateFood added to deps
 
   // Canvas Drawing
   useEffect(() => {
@@ -141,7 +141,7 @@ export default function Error() {
     const ctx = canvas.getContext("2d");
 
     // Clear Canvas
-    ctx.fillStyle = "#1d2021"; // Gruvbox dark background
+    ctx.fillStyle = "#141617"; // Hard Gruvbox Dark
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
     // Draw Grid Lines (optional, for retro feel)
@@ -169,7 +169,7 @@ export default function Error() {
 
     // Draw Snake
     snake.forEach((segment, index) => {
-      ctx.fillStyle = index === 0 ? "#b8bb26" : "#98971a"; // Gruvbox Green (head is brighter)
+      ctx.fillStyle = index === 0 ? "#fabd2f" : "#d79921"; // Gruvbox Gold (head is brighter)
       ctx.fillRect(
         segment.x * (CANVAS_SIZE / GRID_SIZE) + 1,
         segment.y * (CANVAS_SIZE / GRID_SIZE) + 1,
@@ -180,14 +180,14 @@ export default function Error() {
   }, [snake, food]);
 
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setSnake([{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]);
     setDirection({ x: 1, y: 0 });
     setFood(generateFood([{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]));
     setScore(0);
     setGameOver(false);
     setGameStarted(true);
-  };
+  }, [generateFood]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 relative overflow-hidden">

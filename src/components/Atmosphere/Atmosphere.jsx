@@ -1,6 +1,5 @@
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function Atmosphere() {
     const mouseX = useMotionValue(0);
@@ -24,7 +23,7 @@ export default function Atmosphere() {
         >
             {/* Interactive Mouse-following Blob */}
             <motion.div
-                className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-[0.08] pointer-events-none z-0"
+                className="absolute w-[800px] h-[800px] rounded-full blur-[150px] opacity-[0.12] pointer-events-none z-0"
                 style={{
                     x: blobX,
                     y: blobY,
@@ -35,23 +34,23 @@ export default function Atmosphere() {
             />
 
             {/* Static Gruvbox warm blobs */}
-            <div className="vibrant-blob glow-yellow h-[500px] w-[500px] -top-20 -left-20 opacity-[0.05] md:opacity-10 animate-vibrant-float" />
-            <div className="vibrant-blob glow-orange h-[400px] w-[400px] top-1/2 -right-20 opacity-[0.05] md:opacity-10 animate-vibrant-float" style={{ animationDelay: '-10s' }} />
-            <div className="vibrant-blob glow-cyan h-[300px] w-[300px] bottom-0 left-1/4 opacity-[0.04] md:opacity-8 animate-vibrant-float" style={{ animationDelay: '-5s' }} />
-            <div className="vibrant-blob glow-purple h-[400px] w-[400px] top-1/4 right-1/4 opacity-[0.03] md:opacity-5 animate-vibrant-float" style={{ animationDelay: '-15s' }} />
+            <div className="vibrant-blob glow-yellow h-[600px] w-[600px] -top-40 -left-40 opacity-[0.08] md:opacity-15 animate-vibrant-float" />
+            <div className="vibrant-blob glow-orange h-[500px] w-[500px] top-1/2 -right-40 opacity-[0.08] md:opacity-15 animate-vibrant-float" style={{ animationDelay: '-10s' }} />
+            <div className="vibrant-blob glow-cyan h-[400px] w-[400px] bottom-0 left-1/4 opacity-[0.06] md:opacity-10 animate-vibrant-float" style={{ animationDelay: '-5s' }} />
+            <div className="vibrant-blob glow-purple h-[500px] w-[500px] top-1/4 right-1/4 opacity-[0.05] md:opacity-8 animate-vibrant-float" style={{ animationDelay: '-15s' }} />
 
-            {/* Global Dot Grid */}
-            <div className="absolute inset-0 opacity-10 md:opacity-20"
+            {/* Global Dot Grid — Higher contrast for terminal feel */}
+            <div className="absolute inset-0 opacity-[0.15] md:opacity-[0.25]"
                 style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0)`,
-                    backgroundSize: '32px 32px',
+                    backgroundImage: `radial-gradient(circle at 1.5px 1.5px, var(--foreground) 1px, transparent 0)`,
+                    backgroundSize: '48px 48px',
                 }}>
             </div>
 
             {/* Warm Gruvbox Dynamic Beams */}
-            <div className="color-beam top-[15%] opacity-10 md:opacity-15" style={{ '--beam-color': 'var(--primary)', animationDelay: '0s' }} />
-            <div className="color-beam top-[45%] opacity-10 md:opacity-15" style={{ '--beam-color': 'var(--vibrant-orange)', animationDelay: '3s' }} />
-            <div className="color-beam top-[75%] opacity-10 md:opacity-15" style={{ '--beam-color': 'var(--vibrant-cyan)', animationDelay: '6s' }} />
+            <div className="color-beam top-[20%] opacity-15 md:opacity-25" style={{ '--beam-color': 'var(--primary)', animationDelay: '0s' }} />
+            <div className="color-beam top-[50%] opacity-15 md:opacity-25" style={{ '--beam-color': 'var(--vibrant-orange)', animationDelay: '4s' }} />
+            <div className="color-beam top-[80%] opacity-15 md:opacity-25" style={{ '--beam-color': 'var(--vibrant-cyan)', animationDelay: '8s' }} />
         </div>
     );
 }

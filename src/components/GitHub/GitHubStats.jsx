@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { GitBranch, Star, Users, Code, Github } from 'lucide-react';
+import PropTypes from 'prop-types';
 import { getGitHubStats } from '../../lib/github';
 import Section from '../ui/Section';
 
@@ -23,6 +24,13 @@ const StatCard = ({ icon: Icon, label, value, delay }) => (
         <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-border group-hover:border-primary transition-colors" />
     </motion.div>
 );
+
+StatCard.propTypes = {
+    icon: PropTypes.elementType.isRequired,
+    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    delay: PropTypes.number,
+};
 
 const GitHubStats = () => {
     const [stats, setStats] = useState(null);
