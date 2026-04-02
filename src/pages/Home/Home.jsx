@@ -5,7 +5,6 @@ import useSEO from "../../hooks/useSEO"
 
 export default function Home() {
   const [projects] = useState(portfolioData.projects)
-  // const [review] = useState(portfolioData.review);
   const [work] = useState(portfolioData.work)
   const [education] = useState(portfolioData.education)
 
@@ -23,12 +22,9 @@ export default function Home() {
       <WorkExperience work={work} />
       <GitHubStats />
       <Projects projects={projects} />
-      {/* <GitHubCalendar /> */}
       <GitHubProjects />
       <Education education={education} />
-      {/* <Reviews review={review} /> */}
       <Connect />
     </main>
   );
 }
-

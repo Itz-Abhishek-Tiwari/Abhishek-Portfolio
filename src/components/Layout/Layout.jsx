@@ -8,6 +8,7 @@ import useSoundEffects from "../../hooks/useSoundEffects";
 import useEasterEggs from "../../hooks/useEasterEggs";
 import KeyboardShortcutsModal from "../ui/KeyboardShortcutsModal";
 import MatrixOverlay from "../ui/MatrixOverlay";
+import StyleSwitcher from "../StyleSwitcher/StyleSwitcher";
 import { useEffect, useState } from "react";
 
 export default function Layout() {
@@ -59,6 +60,7 @@ export default function Layout() {
             </main>
             <Footer />
             <FloatingContact />
+            <StyleSwitcher />
 
             {/* Easter Eggs */}
             <KeyboardShortcutsModal

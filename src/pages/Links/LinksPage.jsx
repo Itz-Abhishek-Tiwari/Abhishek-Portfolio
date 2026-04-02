@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Terminal, Globe, Cpu, Clock, MapPin, Hash, User } from "lucide-react";
+import { ArrowUpRight, Terminal, Globe, Cpu, Clock, MapPin, Hash } from "lucide-react";
 import PropTypes from 'prop-types';
 import profileImg from "../../assets/profile.png";
 import portfolioData from "../../data";
