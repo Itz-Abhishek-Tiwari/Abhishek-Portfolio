@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Terminal, Globe, Cpu, Clock, MapPin, Hash, User } from "lucide-react";
 import PropTypes from 'prop-types';
+import profileImg from "../../assets/profile.png";
 import portfolioData from "../../data";
 import { PageHeader, Typewriter } from "../../components";
 import useSEO from "../../hooks/useSEO";
@@ -113,9 +114,14 @@ export default function LinksPage() {
                             {/* Bio Profile */}
                             <div className="flex flex-col gap-6">
                                 <div className="flex items-center gap-4 group cursor-default">
-                                    <div className="h-14 w-14 border-2 border-primary/40 bg-primary/5 flex items-center justify-center relative overflow-hidden">
-                                        <div className="absolute inset-0 bg-primary/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                                        <User className="h-7 w-7 text-primary transition-transform group-hover:scale-110" />
+                                    <div className="h-14 w-14 border-2 border-primary/40 bg-zinc-900 flex items-center justify-center relative overflow-hidden group/img">
+                                        <div className="absolute inset-0 bg-primary/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700 z-10" />
+                                        <img 
+                                            src={profileImg} 
+                                            alt="Abhishek Tiwari" 
+                                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                                        />
+                                        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none gruvbox-scanlines z-20" />
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-sm font-mono font-black text-foreground uppercase tracking-tighter group-hover:text-primary transition-colors">Abhishek Tiwari</span>
